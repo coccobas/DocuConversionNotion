@@ -88,6 +88,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware.html">Hardware</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ros_messages.html">ROS Messages</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">MQTT interface</a><ul>
@@ -168,12 +169,6 @@
             
   <div class="section" id="mqtt-interface">
 <span id="id1"></span><h1>MQTT interface<a class="headerlink" href="#mqtt-interface" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Configuration files:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="mqtt_interface_yaml.html">MQTT interface configuration</a></li>
-</ul>
-</div>
 <p>Connecting to MQTT</p>
 <p>The MQTT broker is hosted on 40.87.148.13:1883.</p>
 <table class="colwidths-given docutils align-default" id="id3">
@@ -197,7 +192,7 @@
 <tr class="row-even"><td><p>house/+/rtcm/+/raw</p></td>
 <td><p>→</p></td>
 <td><p>/rtk/rtcm</p></td>
-<td><p><span class="xref std std-ref">beagle_interfaces/RtcmData</span></p></td>
+<td><p><a class="reference internal" href="ros_messages.html#beagle-interfaces-msg-rtcmdata"><span class="std std-ref">beagle_interfaces/RtcmData</span></a></p></td>
 <td></td>
 </tr>
 </tbody>
@@ -208,6 +203,12 @@
 <dd><p>The timestamp is an additional field in a message and is based on <a class="reference external" href="https://docs.python.org/3/library/time.html#time.time">time.time()</a> at the time of transmission of the data. Timestamps of the samples themselves are not included if not stated otherwise.</p>
 </dd>
 </dl>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Configuration files:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interface_yaml.html">MQTT interface configuration</a></li>
+</ul>
+</div>
 </div>
 
 
