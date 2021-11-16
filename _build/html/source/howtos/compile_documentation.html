@@ -98,6 +98,8 @@
 <li class="toctree-l2"><a class="reference internal" href="debug_usb.html">How to debug USB</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware.html">Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
 </ul>
 
             
@@ -170,8 +172,8 @@
   <div class="section" id="compile-the-documentation">
 <h1>Compile the documentation<a class="headerlink" href="#compile-the-documentation" title="Permalink to this headline">¶</a></h1>
 <p>We adhere to the recommendations described on <a class="reference external" href="https://www.writethedocs.org/guide/">https://www.writethedocs.org/guide/</a> and <a class="reference external" href="https://documentation.divio.com/reference/">https://documentation.divio.com/reference/</a>. Reference guides are kept in a similar style as <a class="reference external" href="http://mavlink.io/en/services/mission.html">http://mavlink.io/en/services/mission.html</a>.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo pip install sphinxcontrib-mermaid
-sudo pip install sphinx-jinja sphinxcontrib-napoleon sphinx-rtd-theme
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo pip3 install sphinxcontrib-mermaid
+sudo pip3 install sphinx-jinja sphinxcontrib-napoleon sphinx-rtd-theme
 </pre></div>
 </div>
 <p>Install sphinx-bootstrap-theme:</p>
@@ -203,8 +205,9 @@ make clean <span class="o">&amp;&amp;</span> make html
 </div>
 <div class="section" id="to-generate-a-pdf-using-latex">
 <h2>To generate a pdf using latex<a class="headerlink" href="#to-generate-a-pdf-using-latex" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install texlive-full
-$ make latexpdf
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo apt install texlive-full
+sudo apt install texlive-latex-extra
+make latexpdf
 </pre></div>
 </div>
 <p>The pdf file is located in doc/_build/latex/</p>

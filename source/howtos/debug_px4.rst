@@ -1,13 +1,6 @@
 Debug PX4 topics
 ================
 
-Login to the Jetson connected via USB-to-UART.
-
-.. code-block:: sh
-
-   $ sudo systemctl stop beagle
-   $ screen /dev/ttyUSB0 57600 8N1
-
 NuttX shell, list all available commands and list all uORB topics:
 
 .. code-block:: sh
@@ -35,9 +28,9 @@ Next, we start the node as root.
 .. code-block:: sh
 
    $ sudo su -
-   # export HOME=/home/simadm
-   # source $HOME/.hparc
-   # gdb --args $HOME/Development/Firmware/build/px4_sitl_default/bin/px4 /$HOME/Development/Firmware/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -t /$HOME/Development/Firmware/test_data
+   # export HOME=/home/beagle
+   # source $HOME/.beaglerc
+   # gdb --args $HOME/Development/beaglesystems/PX4-Autopilot/build/px4_sitl_rtps/bin/px4 /$HOME/Development/beaglesystems/PX4-Autopilot/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -t /$HOME/Development/beaglesystems/PX4-Autopilot/test_data
    (gdb) handle SIGCONT noprint nostop
    (gdb) run
 

@@ -131,7 +131,9 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #
-    # 'preamble': '',
+    'preamble': r'''
+    \usepackage{pdflscape}
+    ''',
 
     # Latex figure (float) alignment
     #
@@ -196,9 +198,10 @@ mqtt_interface["messages"] = dict()
 
 def add_message(messages, msg_package, msg_name):
     msgp = msg_package.replace(".", "/")
-    if not os.path.exists("../src/beagle_interfaces/{}/{}.msg".format(msgp, msg_name)):
+    print(msgp, "../BeagleComrade/src/beaglesystems/{}/{}.msg".format(msgp, msg_name))
+    if not os.path.exists("../BeagleComrade/src/beaglesystems/{}/{}.msg".format(msgp, msg_name)):
         return False
-    with open("../src/beagle_interfaces/{}/{}.msg".format(msgp, msg_name)) as fp:
+    with open("../BeagleComrade/src/beaglesystems/{}/{}.msg".format(msgp, msg_name)) as fp:
         fields = []
         for i, field in enumerate(fp):
             comment = ""
@@ -243,6 +246,7 @@ for bridge in mqtt_interface_all["bridge"]:
             "ros_topic": bridge["topic_from"] if bridge["factory"] == "mqtt_bridge.bridge:RosToMqttBridge" else bridge["topic_to"],
             "timestamp": bridge.get("timestamp", False)
         })
+        print(mqtt_interface["bridge"][-1])
 
 print(mqtt_interface["messages"])
 jinja_contexts = {

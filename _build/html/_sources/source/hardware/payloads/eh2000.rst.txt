@@ -1,0 +1,58 @@
+######
+EH2000
+######
+
+Test commands for the NuttX shell
+=================================
+
+Get the device information and reported feedback from the gimbal:
+
+.. code-block:: sh
+
+   listener gimbal_device_information
+   listener gimbal_device_attitude_status
+
+Do a camera trigger test:
+
+.. code-block:: sh
+
+   camera_trigger test
+
+Do a continuous camera trigger test until stopped:
+
+.. code-block:: sh
+
+   camera_trigger test_interval
+   camera_trigger test_interval stop
+
+Make the camera look forward and follow yaw:
+
+.. code-block:: sh
+
+   eh2000 test follow
+
+Make the camera look down and follow yaw:
+
+.. code-block:: sh
+
+   eh2000 test lookdown
+
+Make the camera look left/right with a pitch of 45 degrees down:
+
+.. code-block:: sh
+
+   eh2000 test lookleft
+   eh2000 test lookright
+
+Prepare the camera for precision landing, which includes the following commands:
+
+- zoom out (:mavlink:`MAV_CMD_SET_CAMERA_ZOOM`)
+- auto focus (:mavlink:`MAV_CMD_SET_CAMERA_FOCUS`)
+- follow yaw (:mavlink:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW`)
+- lookdown (:mavlink:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW`)
+
+.. code-block:: sh
+
+   eh2000 test precland
+
+

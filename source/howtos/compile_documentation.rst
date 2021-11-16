@@ -5,8 +5,8 @@ We adhere to the recommendations described on https://www.writethedocs.org/guide
 
 .. code-block:: sh
 
-   sudo pip install sphinxcontrib-mermaid
-   sudo pip install sphinx-jinja sphinxcontrib-napoleon sphinx-rtd-theme
+   sudo pip3 install sphinxcontrib-mermaid
+   sudo pip3 install sphinx-jinja sphinxcontrib-napoleon sphinx-rtd-theme
 
 Install sphinx-bootstrap-theme:
 
@@ -48,7 +48,8 @@ To generate a pdf using latex
 
 .. code-block:: sh
 
-   $ sudo apt-get install texlive-full
-   $ make latexpdf
+   sudo apt install texlive-full
+   sudo apt install texlive-latex-extra
+   make latexpdf
 
 The pdf file is located in doc/_build/latex/

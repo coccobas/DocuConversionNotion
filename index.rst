@@ -7,8 +7,9 @@ Welcome to BeagleSystems Software documentation!
 ================================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :caption: Contents:
 
    source/howtos
+   source/hardware
    source/reference
