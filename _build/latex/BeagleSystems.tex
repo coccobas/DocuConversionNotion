@@ -358,6 +358,42 @@ lookdown (\sphinxhref{https://mavlink.io/en/messages/common.html\#MAV\_CMD\_DO\_
 eh2000 \PYG{n+nb}{test} precland
 \end{sphinxVerbatim}
 
+We prepared some profiles for the camera:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+eh2000 \PYG{n+nb}{test} profile\PYGZus{}auto
+eh2000 \PYG{n+nb}{test} profile\PYGZus{}shutter
+\end{sphinxVerbatim}
+
+Important!! In the current state, we do not set the save path automatically. Make sure to run the following command after ssh’ing to the drone:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=setSavePath\PYGZam{}path=1\PYGZdq{}}
+\end{sphinxVerbatim}
+
+As a fallback option, ssh to the drone and run these commands:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Format the SD card}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=formatMedia\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Switch to manual mode}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=shootMode\PYGZam{}mode=5\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Set aperture to F5.6}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=apertureMode\PYGZam{}mode=16\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Set ISO mode to AUTO}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=isoMode\PYGZam{}mode=0\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Set shutter speed to 1/2500}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=shutterSpeedMode\PYGZam{}mode=18\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Set exposure compensation to \PYGZhy{}0.3EV}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=exposureCompensationMode\PYGZam{}mode=4\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Set zoom to 0 (completely zoomed out)}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=setZoomValue\PYGZam{}value=0\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Save images to SD card}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=setSavePath\PYGZam{}path=1\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} Do a single capture}
+curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=capture\PYGZam{}mode=0\PYGZdq{}}
+\end{sphinxVerbatim}
+
 
 \chapter{Reference}
 \label{\detokenize{source/reference:reference}}\label{\detokenize{source/reference::doc}}

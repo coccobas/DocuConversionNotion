@@ -55,4 +55,38 @@ Prepare the camera for precision landing, which includes the following commands:
 
    eh2000 test precland
 
+We prepared some profiles for the camera:
 
+.. code-block:: sh
+
+   eh2000 test profile_auto
+   eh2000 test profile_shutter
+
+Important!! In the current state, we do not set the save path automatically. Make sure to run the following command after ssh'ing to the drone:
+
+.. code-block:: sh
+
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setSavePath&path=1"
+
+As a fallback option, ssh to the drone and run these commands:
+
+.. code-block:: sh
+
+   # Format the SD card
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=formatMedia"
+   # Switch to manual mode
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=shootMode&mode=5"
+   # Set aperture to F5.6
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=apertureMode&mode=16"
+   # Set ISO mode to AUTO
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=isoMode&mode=0"
+   # Set shutter speed to 1/2500
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=shutterSpeedMode&mode=18"
+   # Set exposure compensation to -0.3EV
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=exposureCompensationMode&mode=4"
+   # Set zoom to 0 (completely zoomed out)
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setZoomValue&value=0"
+   # Save images to SD card
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setSavePath&path=1"
+   # Do a single capture
+   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=capture&mode=0"

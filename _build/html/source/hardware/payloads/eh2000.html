@@ -211,6 +211,36 @@ eh2000 <span class="nb">test</span> lookright
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>eh2000 <span class="nb">test</span> precland
 </pre></div>
 </div>
+<p>We prepared some profiles for the camera:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>eh2000 <span class="nb">test</span> profile_auto
+eh2000 <span class="nb">test</span> profile_shutter
+</pre></div>
+</div>
+<p>Important!! In the current state, we do not set the save path automatically. Make sure to run the following command after ssh’ing to the drone:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setSavePath&amp;path=1&quot;</span>
+</pre></div>
+</div>
+<p>As a fallback option, ssh to the drone and run these commands:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format the SD card</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=formatMedia&quot;</span>
+<span class="c1"># Switch to manual mode</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=shootMode&amp;mode=5&quot;</span>
+<span class="c1"># Set aperture to F5.6</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=apertureMode&amp;mode=16&quot;</span>
+<span class="c1"># Set ISO mode to AUTO</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=isoMode&amp;mode=0&quot;</span>
+<span class="c1"># Set shutter speed to 1/2500</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=shutterSpeedMode&amp;mode=18&quot;</span>
+<span class="c1"># Set exposure compensation to -0.3EV</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=exposureCompensationMode&amp;mode=4&quot;</span>
+<span class="c1"># Set zoom to 0 (completely zoomed out)</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setZoomValue&amp;value=0&quot;</span>
+<span class="c1"># Save images to SD card</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setSavePath&amp;path=1&quot;</span>
+<span class="c1"># Do a single capture</span>
+curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=capture&amp;mode=0&quot;</span>
+</pre></div>
+</div>
 </div>
 </div>
 
