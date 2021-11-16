@@ -1,0 +1,24 @@
+{% if message in messages %}
+{% if label %}
+.. _{{message}}:
+
+{% endif %}
+{{"*Empty*" if messages[message]["fields"]|length == 0}}
+{% for field in messages[message]["fields"] %}
+{% if field["type"] in messages and recursive %}
+{{field["name"]}}:
+{% macro recrosmsg() %}
+{% with messages=messages,message=field["type"],label=False,recursive=recursive %}
+{% include "templates/ros_message.rst.jinja" %}
+{% endwith %}
+{% endmacro %}
+{{ recrosmsg()|indent(2) }}
+{% else %}
+{% if "ref" in field and field["ref"] in messages %}
+:ref:`{{field["type_simple"]}} {{field["name"]}}<{{field["ref"]}}>`
+{% else %}
+{{field["type_simple"]}} {{field["name"]}}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}

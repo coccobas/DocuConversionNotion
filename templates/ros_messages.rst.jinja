@@ -1,0 +1,21 @@
+ROS Messages
+============
+
+ROS message definitions
+-----------------------
+
+.. list-table:: Mapping of MQTT and ROS topics
+   :widths: 30 70
+   :header-rows: 1
+
+   * - ROS message
+     - Data format
+{% for key, message in messages.items() %}
+   * - {{message["package"][:-4]}}/{{message["name"]}}
+     - {% macro rosmsg() %}
+       {% with messages=messages,message=key,label=True,recursive=True %}
+       {% include "templates/ros_message.rst.jinja" %}
+       {% endwith %}
+       {% endmacro %}
+       {{ rosmsg()|indent(6) }}
+{% endfor %}

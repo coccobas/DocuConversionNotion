@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Install the BeagleSystems Software on a drone &mdash; BeagleSystems Software  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="install_ftdi4232h.html" />
+    <link rel="prev" title="HowTos" href="../howtos.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BeagleSystems Software
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../howtos.html">HowTos</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install the BeagleSystems Software on a drone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compile_documentation.html">Compile the documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_px4.html">Debug PX4 topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_usb.html">How to debug USB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BeagleSystems Software</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../howtos.html">HowTos</a> &raquo;</li>
+        
+      <li>Install the BeagleSystems Software on a drone</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/source/howtos/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-the-beaglesystems-software-on-a-drone">
+<h1>Install the BeagleSystems Software on a drone<a class="headerlink" href="#install-the-beaglesystems-software-on-a-drone" title="Permalink to this headline">¶</a></h1>
+<p>To gain access to the repository, we first have to do some setup:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ git config --global http.postBuffer <span class="m">524288000</span>
+$ ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&quot;your_email@beaglesystems.com&quot;</span>
+$ cat ~/.ssh/id_rsa.pub
+</pre></div>
+</div>
+<p>Upload the public key to your github settings to be able to download the repository.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ mkdir Development
+$ <span class="nb">cd</span> Development
+$ git clone git@github.com:BeagleSystems/BeagleComrade -b develop
+</pre></div>
+</div>
+<p>Create the file ~/.beaglerc with the following content.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># !!! Double check that these paths are correctly set !!!</span>
+<span class="nb">source</span> /opt/ros/noetic/setup.bash
+<span class="nb">source</span> /home/david/Development/beaglesystems/BeagleComrade/devel/setup.bash
+<span class="nb">export</span> <span class="nv">ROS_PACKAGE_PATH</span><span class="o">=</span>/home/david/Development/beaglesystems/PX4-Autopilot:/home/david/Development/beaglesystems/PX4-Autopilot/Tools/sitl_gazebo:<span class="nv">$ROS_PACKAGE_PATH</span>
+
+<span class="c1"># These exports are necessary if you try to run ROS debugging tools connected via WiFi to the drone. Use the same exports on your local computer</span>
+<span class="c1">#export ROS_HOSTNAME=192.168.8.100</span>
+<span class="c1">#export ROS_IP=$ROS_HOSTNAME</span>
+<span class="c1">#export ROS_MASTER_URI=http://$ROS_HOSTNAME:11311</span>
+
+<span class="nb">export</span> <span class="nv">GST_PLUGIN_PATH</span><span class="o">=</span>/usr/local/lib/aarch64-linux-gnu/gstreamer-1.0:/usr/lib/aarch64-linux-gnu/gstreamer-1.0
+<span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/lib/aarch64-linux-gnu:<span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="install_ftdi4232h.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../howtos.html" class="btn btn-neutral float-left" title="HowTos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, BeagleSystems GmbH.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

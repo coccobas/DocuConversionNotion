@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>rosbridge_library.internal.message_conversion &mdash; BeagleSystems Software  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> BeagleSystems Software
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">BeagleSystems Software</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>rosbridge_library.internal.message_conversion</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for rosbridge_library.internal.message_conversion</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># Software License Agreement (BSD License)</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2012, Willow Garage, Inc.</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions</span>
+<span class="c1"># are met:</span>
+<span class="c1">#</span>
+<span class="c1">#  * Redistributions of source code must retain the above copyright</span>
+<span class="c1">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c1">#  * Redistributions in binary form must reproduce the above</span>
+<span class="c1">#    copyright notice, this list of conditions and the following</span>
+<span class="c1">#    disclaimer in the documentation and/or other materials provided</span>
+<span class="c1">#    with the distribution.</span>
+<span class="c1">#  * Neither the name of Willow Garage, Inc. nor the names of its</span>
+<span class="c1">#    contributors may be used to endorse or promote products derived</span>
+<span class="c1">#    from this software without specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c1"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c1"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="c1"># FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="c1"># COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="c1"># INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="c1"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="c1"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="c1"># LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="c1"># ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c1"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">roslib</span>
+<span class="kn">import</span> <span class="nn">rospy</span>
+
+<span class="kn">from</span> <span class="nn">rosbridge_library.internal</span> <span class="kn">import</span> <span class="n">ros_loader</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">standard_b64encode</span><span class="p">,</span> <span class="n">standard_b64decode</span>
+
+<span class="kn">from</span> <span class="nn">rosbridge_library.util</span> <span class="kn">import</span> <span class="n">string_types</span><span class="p">,</span> <span class="n">bson</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;bool&quot;</span><span class="p">:</span>    <span class="p">[</span><span class="s2">&quot;bool&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;int&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="s2">&quot;int8&quot;</span><span class="p">,</span> <span class="s2">&quot;byte&quot;</span><span class="p">,</span> <span class="s2">&quot;uint8&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;int16&quot;</span><span class="p">,</span> <span class="s2">&quot;uint16&quot;</span><span class="p">,</span> <span class="s2">&quot;int32&quot;</span><span class="p">,</span> <span class="s2">&quot;uint32&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;int64&quot;</span><span class="p">,</span> <span class="s2">&quot;uint64&quot;</span><span class="p">,</span> <span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;float&quot;</span><span class="p">:</span>   <span class="p">[</span><span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;str&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">primitive_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+    <span class="n">python2</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;bool&quot;</span><span class="p">:</span>    <span class="p">[</span><span class="s2">&quot;bool&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;int&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="s2">&quot;int8&quot;</span><span class="p">,</span> <span class="s2">&quot;byte&quot;</span><span class="p">,</span> <span class="s2">&quot;uint8&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;int16&quot;</span><span class="p">,</span> <span class="s2">&quot;uint16&quot;</span><span class="p">,</span> <span class="s2">&quot;int32&quot;</span><span class="p">,</span> <span class="s2">&quot;uint32&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;int64&quot;</span><span class="p">,</span> <span class="s2">&quot;uint64&quot;</span><span class="p">,</span> <span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;float&quot;</span><span class="p">:</span>   <span class="p">[</span><span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;str&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;unicode&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;long&quot;</span><span class="p">:</span>    <span class="p">[</span><span class="s2">&quot;int64&quot;</span><span class="p">,</span> <span class="s2">&quot;uint64&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">primitive_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">long</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>  <span class="c1"># noqa: F821</span>
+    <span class="n">python2</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">list_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">]</span>
+<span class="n">ros_time_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">]</span>
+<span class="n">ros_primitive_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bool&quot;</span><span class="p">,</span> <span class="s2">&quot;byte&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">,</span> <span class="s2">&quot;int8&quot;</span><span class="p">,</span> <span class="s2">&quot;uint8&quot;</span><span class="p">,</span> <span class="s2">&quot;int16&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;uint16&quot;</span><span class="p">,</span> <span class="s2">&quot;int32&quot;</span><span class="p">,</span> <span class="s2">&quot;uint32&quot;</span><span class="p">,</span> <span class="s2">&quot;int64&quot;</span><span class="p">,</span> <span class="s2">&quot;uint64&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">]</span>
+<span class="n">ros_header_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Header&quot;</span><span class="p">,</span> <span class="s2">&quot;std_msgs/Header&quot;</span><span class="p">,</span> <span class="s2">&quot;roslib/Header&quot;</span><span class="p">]</span>
+<span class="n">ros_binary_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;uint8[]&quot;</span><span class="p">,</span> <span class="s2">&quot;char[]&quot;</span><span class="p">]</span>
+<span class="n">list_braces</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\[[^\]]*\]&#39;</span><span class="p">)</span>
+<span class="n">ros_binary_types_list_braces</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;uint8[]&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;uint8\[[^\]]*\]&#39;</span><span class="p">)),</span>
+                                <span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;char\[[^\]]*\]&#39;</span><span class="p">))]</span>
+
+<span class="n">binary_encoder</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">bson_only_mode</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">get_encoder</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">binary_encoder</span><span class="p">,</span><span class="n">bson_only_mode</span>
+    <span class="k">if</span> <span class="n">binary_encoder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">binary_encoder_type</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;~binary_encoder&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span>
+        <span class="n">bson_only_mode</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;~bson_only_mode&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">binary_encoder_type</span> <span class="o">==</span> <span class="s1">&#39;bson&#39;</span> <span class="ow">or</span> <span class="n">bson_only_mode</span><span class="p">:</span>
+            <span class="n">binary_encoder</span> <span class="o">=</span> <span class="n">bson</span><span class="o">.</span><span class="n">Binary</span>
+        <span class="k">elif</span> <span class="n">binary_encoder_type</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span> <span class="ow">or</span> <span class="n">binary_encoder_type</span> <span class="o">==</span> <span class="s1">&#39;b64&#39;</span><span class="p">:</span>
+             <span class="n">binary_encoder</span> <span class="o">=</span> <span class="n">standard_b64encode</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unknown encoder type &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="o">%</span><span class="n">binary_encoder_type</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">binary_encoder</span>
+
+<span class="k">class</span> <span class="nc">InvalidMessageException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inst</span><span class="p">):</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Unable to extract message values from </span><span class="si">%s</span><span class="s2"> instance&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">NonexistentFieldException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basetype</span><span class="p">,</span> <span class="n">fields</span><span class="p">):</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Message type </span><span class="si">%s</span><span class="s2"> does not have a field </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">basetype</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fields</span><span class="p">)))</span>
+
+
+<span class="k">class</span> <span class="nc">FieldTypeMismatchException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">,</span> <span class="n">found_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">roottype</span> <span class="o">==</span> <span class="n">expected_type</span><span class="p">:</span>
+            <span class="ne">Exception</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Expected a JSON object for type </span><span class="si">%s</span><span class="s2"> but received a </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">roottype</span><span class="p">,</span> <span class="n">found_type</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="ne">Exception</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> message requires a </span><span class="si">%s</span><span class="s2"> for field </span><span class="si">%s</span><span class="s2">, but got a </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">roottype</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fields</span><span class="p">),</span> <span class="n">found_type</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="extract_values"><a class="viewcode-back" href="../../../source/mqtt_bridge/mqtt_bridge.html#mqtt_bridge.util.extract_values">[docs]</a><span class="k">def</span> <span class="nf">extract_values</span><span class="p">(</span><span class="n">inst</span><span class="p">):</span>
+    <span class="n">rostype</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="s2">&quot;_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rostype</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidMessageException</span><span class="p">(</span><span class="n">inst</span><span class="o">=</span><span class="n">inst</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_from_inst</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">rostype</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="populate_instance"><a class="viewcode-back" href="../../../source/mqtt_bridge/mqtt_bridge.html#mqtt_bridge.util.populate_instance">[docs]</a><span class="k">def</span> <span class="nf">populate_instance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">inst</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns an instance of the provided class, with its fields populated</span>
+<span class="sd">    according to the values in msg &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_to_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">inst</span><span class="o">.</span><span class="n">_type</span><span class="p">,</span> <span class="n">inst</span><span class="o">.</span><span class="n">_type</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_from_inst</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">rostype</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">bson_only_mode</span>
+    <span class="c1"># Special case for uint8[], we encode the string</span>
+    <span class="k">for</span> <span class="n">binary_type</span><span class="p">,</span> <span class="n">expression</span> <span class="ow">in</span> <span class="n">ros_binary_types_list_braces</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">expression</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">binary_type</span><span class="p">,</span> <span class="n">rostype</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ros_binary_types</span><span class="p">:</span>
+            <span class="n">encoded</span> <span class="o">=</span> <span class="n">get_encoder</span><span class="p">()(</span><span class="n">inst</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">encoded</span> <span class="k">if</span> <span class="n">python2</span> <span class="k">else</span> <span class="n">encoded</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Check for time or duration</span>
+    <span class="k">if</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="n">ros_time_types</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;secs&quot;</span><span class="p">:</span> <span class="n">inst</span><span class="o">.</span><span class="n">secs</span><span class="p">,</span> <span class="s2">&quot;nsecs&quot;</span><span class="p">:</span> <span class="n">inst</span><span class="o">.</span><span class="n">nsecs</span><span class="p">}</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">bson_only_mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span><span class="n">bson_only_mode</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;~bson_only_mode&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># Check for primitive types</span>
+    <span class="k">if</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="n">ros_primitive_types</span><span class="p">:</span>
+        <span class="c1">#JSON does not support Inf and NaN. They are mapped to None and encoded as null</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">bson_only_mode</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">rostype</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span> <span class="ow">or</span> <span class="n">math</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">inst</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">inst</span>
+
+    <span class="c1"># Check if it&#39;s a list or tuple</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span> <span class="ow">in</span> <span class="n">list_types</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_from_list_inst</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">rostype</span><span class="p">)</span>
+
+    <span class="c1"># Assume it&#39;s otherwise a full ros msg object</span>
+    <span class="k">return</span> <span class="n">_from_object_inst</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">rostype</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_from_list_inst</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">rostype</span><span class="p">):</span>
+    <span class="c1"># Can duck out early if the list is empty</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="c1"># Remove the list indicators from the rostype</span>
+    <span class="n">rostype</span> <span class="o">=</span> <span class="n">list_braces</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">rostype</span><span class="p">)</span>
+
+    <span class="c1"># Shortcut for primitives</span>
+    <span class="k">if</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="n">ros_primitive_types</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+
+    <span class="c1"># Call to _to_inst for every element of the list</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_from_inst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rostype</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">inst</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_from_object_inst</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">rostype</span><span class="p">):</span>
+    <span class="c1"># Create an empty dict then populate with values from the inst</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_rostype</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">inst</span><span class="o">.</span><span class="vm">__slots__</span><span class="p">,</span> <span class="n">inst</span><span class="o">.</span><span class="n">_slot_types</span><span class="p">):</span>
+        <span class="n">field_inst</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+        <span class="n">msg</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">_from_inst</span><span class="p">(</span><span class="n">field_inst</span><span class="p">,</span> <span class="n">field_rostype</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">msg</span>
+
+
+<span class="k">def</span> <span class="nf">_to_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="n">inst</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stack</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="c1"># Check if it&#39;s uint8[], and if it&#39;s a string, try to b64decode</span>
+    <span class="k">for</span> <span class="n">binary_type</span><span class="p">,</span> <span class="n">expression</span> <span class="ow">in</span> <span class="n">ros_binary_types_list_braces</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">expression</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">binary_type</span><span class="p">,</span> <span class="n">rostype</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ros_binary_types</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_to_binary_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="c1"># Check the type for time or rostime</span>
+    <span class="k">if</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="n">ros_time_types</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_to_time_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
+
+    <span class="c1"># Check to see whether this is a primitive type</span>
+    <span class="k">if</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="n">ros_primitive_types</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_to_primitive_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="n">stack</span><span class="p">)</span>
+
+    <span class="c1"># Check whether we&#39;re dealing with a list type</span>
+    <span class="k">if</span> <span class="n">inst</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span> <span class="ow">in</span> <span class="n">list_types</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_to_list_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="n">inst</span><span class="p">,</span> <span class="n">stack</span><span class="p">)</span>
+
+    <span class="c1"># Otherwise, the type has to be a full ros msg type, so msg must be a dict</span>
+    <span class="k">if</span> <span class="n">inst</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">inst</span> <span class="o">=</span> <span class="n">ros_loader</span><span class="o">.</span><span class="n">get_message_instance</span><span class="p">(</span><span class="n">rostype</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_to_object_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="n">inst</span><span class="p">,</span> <span class="n">stack</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_to_binary_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="ow">in</span> <span class="n">string_types</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">standard_b64decode</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">:</span>
+            <span class="k">return</span> <span class="n">msg</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">msg</span>
+
+
+<span class="k">def</span> <span class="nf">_to_time_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">inst</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># Create an instance if we haven&#39;t been provided with one</span>
+    <span class="k">if</span> <span class="n">rostype</span> <span class="o">==</span> <span class="s2">&quot;time&quot;</span> <span class="ow">and</span> <span class="n">msg</span> <span class="o">==</span> <span class="s2">&quot;now&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_rostime</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">inst</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rostype</span> <span class="o">==</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span>
+            <span class="n">inst</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">rostime</span><span class="o">.</span><span class="n">Time</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">rostype</span> <span class="o">==</span> <span class="s2">&quot;duration&quot;</span><span class="p">:</span>
+            <span class="n">inst</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">rostime</span><span class="o">.</span><span class="n">Duration</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Copy across the fields</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;secs&quot;</span><span class="p">,</span> <span class="s2">&quot;nsecs&quot;</span><span class="p">]:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">msg</span><span class="p">[</span><span class="n">field</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="k">return</span> <span class="n">inst</span>
+
+
+<span class="k">def</span> <span class="nf">_to_primitive_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="n">stack</span><span class="p">):</span>
+    <span class="c1"># Typecheck the msg</span>
+    <span class="n">msgtype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">msgtype</span> <span class="ow">in</span> <span class="n">primitive_types</span> <span class="ow">and</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="n">type_map</span><span class="p">[</span><span class="n">msgtype</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">msg</span>
+    <span class="k">elif</span> <span class="n">msgtype</span> <span class="ow">in</span> <span class="n">string_types</span> <span class="ow">and</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="n">type_map</span><span class="p">[</span><span class="n">msgtype</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">python2</span> <span class="k">else</span> <span class="n">msg</span>
+    <span class="k">raise</span> <span class="n">FieldTypeMismatchException</span><span class="p">(</span><span class="n">roottype</span><span class="p">,</span> <span class="n">stack</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">msgtype</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_to_list_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="n">inst</span><span class="p">,</span> <span class="n">stack</span><span class="p">):</span>
+    <span class="c1"># Typecheck the msg</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">list_types</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FieldTypeMismatchException</span><span class="p">(</span><span class="n">roottype</span><span class="p">,</span> <span class="n">stack</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+
+    <span class="c1"># Can duck out early if the list is empty</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="c1"># Remove the list indicators from the rostype</span>
+    <span class="n">rostype</span> <span class="o">=</span> <span class="n">list_braces</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">rostype</span><span class="p">)</span>
+
+    <span class="c1"># Call to _to_inst for every element of the list</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_to_inst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stack</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_to_object_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="n">roottype</span><span class="p">,</span> <span class="n">inst</span><span class="p">,</span> <span class="n">stack</span><span class="p">):</span>
+    <span class="c1"># Typecheck the msg</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FieldTypeMismatchException</span><span class="p">(</span><span class="n">roottype</span><span class="p">,</span> <span class="n">stack</span><span class="p">,</span> <span class="n">rostype</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+
+    <span class="c1"># Substitute the correct time if we&#39;re an std_msgs/Header</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rostype</span> <span class="ow">in</span> <span class="n">ros_header_types</span><span class="p">:</span>
+            <span class="n">cur_time</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_rostime</span><span class="p">()</span>
+            <span class="c1"># copy attributes of global Time obj to inst.stamp</span>
+            <span class="n">inst</span><span class="o">.</span><span class="n">stamp</span><span class="o">.</span><span class="n">secs</span> <span class="o">=</span> <span class="n">cur_time</span><span class="o">.</span><span class="n">secs</span>
+            <span class="n">inst</span><span class="o">.</span><span class="n">stamp</span><span class="o">.</span><span class="n">nsecs</span> <span class="o">=</span> <span class="n">cur_time</span><span class="o">.</span><span class="n">nsecs</span>
+    <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ROSInitException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">logdebug</span><span class="p">(</span><span class="s2">&quot;Not substituting the correct header time: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+
+    <span class="n">inst_fields</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inst</span><span class="o">.</span><span class="vm">__slots__</span><span class="p">,</span> <span class="n">inst</span><span class="o">.</span><span class="n">_slot_types</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+        <span class="c1"># Add this field to the field stack</span>
+        <span class="n">field_stack</span> <span class="o">=</span> <span class="n">stack</span> <span class="o">+</span> <span class="p">[</span><span class="n">field_name</span><span class="p">]</span>
+
+        <span class="c1"># Raise an exception if the msg contains a bad field</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">inst_fields</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NonexistentFieldException</span><span class="p">(</span><span class="n">roottype</span><span class="p">,</span> <span class="n">field_stack</span><span class="p">)</span>
+
+        <span class="n">field_rostype</span> <span class="o">=</span> <span class="n">inst_fields</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span>
+        <span class="n">field_inst</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+
+        <span class="n">field_value</span> <span class="o">=</span> <span class="n">_to_inst</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="n">field_name</span><span class="p">],</span> <span class="n">field_rostype</span><span class="p">,</span>
+                    <span class="n">roottype</span><span class="p">,</span> <span class="n">field_inst</span><span class="p">,</span> <span class="n">field_stack</span><span class="p">)</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">inst</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, BeagleSystems GmbH.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

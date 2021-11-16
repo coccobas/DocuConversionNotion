@@ -1,0 +1,22 @@
+title Simple mission
+
+UI->Backend: mqtt login
+UI->Backend: vehicle/select
+Backend->Rover: flight/start
+Rover->PX4: /mavros/cmd/set_home
+PX4->Rover: MAV_CMD_ACK
+UI->Backend: mission/create
+Backend->UI: mission/created
+UI->Backend: vehicle/assign
+Backend->Rover: mission/data
+Rover->PX4: /mavros/mission/push
+Rover->Backend: state
+Backend->Rover: mission/start
+Rover->PX4: /mavros/cmd/arming T
+PX4->Rover: MAV_CMD_ACK
+Rover->PX4: /mavros/set_mode
+PX4->Rover: MAV_CMD_ACK
+UI->Backend: vehicle/unselect
+Backend->Rover: flight/finish
+Rover->PX4: /mavros/cmd/arming F
+PX4->Rover: MAV_CMD_ACK

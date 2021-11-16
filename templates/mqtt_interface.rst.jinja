@@ -1,0 +1,24 @@
+Connecting to MQTT
+
+The MQTT broker is hosted on {{ interface["mqtt"]["connection"]["host"] }}:{{ interface["mqtt"]["connection"]["port"] }}.
+
+.. list-table:: Mapping of MQTT and ROS topics
+   :widths: 25 10 25 20 20
+   :header-rows: 1
+
+   * - MQTT topic
+     - In/Out
+     - ROS topic
+     - Data format
+     - Timestamp [#timestamp]_
+{% for bridge in interface["bridge"] %}
+   * - {{bridge["mqtt_topic"]}}
+     - {{"→" if bridge["direction"] == "in" else "←"}}
+     - {{bridge["ros_topic"]}}
+     - :ref:`{{bridge["type_simple"]}}<{{bridge["type"]}}>`
+     - {{"✓" if bridge["timestamp"]}}
+{% endfor %}
+
+.. rubric:: Footnotes
+
+.. [#timestamp] The timestamp is an additional field in a message and is based on `time.time() <https://docs.python.org/3/library/time.html#time.time>`__ at the time of transmission of the data. Timestamps of the samples themselves are not included if not stated otherwise.
