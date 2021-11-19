@@ -1,82 +1,58 @@
 Precision Landing Integration with Gimbal Camera
-==========================================
+================================================
 
 .. mermaid::
 
     sequenceDiagram
-        participant ORB as uORB
-        participant VMN as gimbal_vmount
-        participant GL as gimbal_lock_precland
+        participant AR as aruco_map
+
         participant LT as landing_target_estimator
         participant PLD as precland
-        participant ML as Mavlink
+        participant GL as gimbal_lock_precland
+        participant VMN as gimbal_vmount
         
         participant GDC as gimbal_device_controller
 
-        participant MR as mavros
-        participant AR as aruco_map
 
-        ORB --> GL: sub commander_state
-        ORB --> GL: sub vtol_vehicle_status
-
-        GL --> GL: if control in RTL mode and VTOL in MC mode
+        GL ->> GL: if control in RTL mode and VTOL in MC mode
 
         rect rgb(120, 100, 200)
         loop if gimbal feedback status check timeout in 5s
             
-            GL --> ORB: pub set_camera_focus
-            ORB --> ML: MAV_CMD_SET_CAMERA_FOCUS (#532)
-            ML --> GDC: MAV_CMD_SET_CAMERA_FOCUS (#532)
-            GL --> ORB: pub set_camera_zoom
-            ORB --> ML: MAV_CMD_SET_CAMERA_ZOOM (#531)
-            ML --> GDC: MAV_CMD_SET_CAMERA_ZOOM (#531)
+            GL ->> GDC: MAV_CMD_SET_CAMERA_FOCUS
+            GL ->> GDC: MAV_CMD_SET_CAMERA_ZOOM
 
-            GL --> ORB: pub gimbal_manager_set_attitude
-            ORB --> VMN: GIMBAL_MANAGER_SET_ATTITUDE ( #282 )
-            VMN --> ML: GIMBAL_DEVICE_SET_ATTITUDE ( #284 )
-            ML --> GDC: GIMBAL_DEVICE_SET_ATTITUDE ( #284 )
+            GL ->> VMN: gimbal_manager_set_attitude
+            VMN ->> GDC: GIMBAL_DEVICE_SET_ATTITUDE
 
-            GDC --> ML: GIMBAL_DEVICE_ATTITUDE_STATUS ( #285 )
-            ML --> VMN: GIMBAL_DEVICE_ATTITUDE_STATUS ( #285 )
+            GDC ->> GL: GIMBAL_DEVICE_ATTITUDE_STATUS
 
-            VMN --> ORB: gimbal_device_attitude_status
-            ORB --> GL: sub gimbal_device_attitude_status
-
-            GL --> GL: check if gimbal is lock to pitch -90 deg
-            GL --> ORB: pub gimbal_lock_status
+            GL ->> GL: check if gimbal is lock to pitch -90 deg
+            GL ->> LT: gimbal_lock_status
         end
         end
 
         rect rgb(100, 150, 200)
         alt PrecLand
 
-            ORB --> LT: sub gimbal_lock_status
-            LT --> LT: if using gimbal and locked:start the estimator
+            LT ->> LT: if gimbal locked facing down: start the estimator
 
-            AR --> MR: LANDING_TARGET (#149)
-            MR --> ML: LANDING_TARGET (#149)
+            AR ->> LT: LANDING_TARGET/irlock_report
+            LT ->> PLD: landing_target_pose_filtered
+            PLD ->> PLD: do precland inside navigator
 
-            ML --> ORB: irlock_report
-            ORB --> LT: irlock_report
-            LT --> PLD: pub landing_target_pose_filtered
-            PLD --> PLD: do precland inside navigator
-
-            PLD --> ORB: pub precland_status
+            PLD ->> GL: precland_status
         end
         end
 
         rect rgb(120, 100, 200)
-        alt rest gimbal to safe position
-            ORB --> GL: sub precland_status
-            GL --> GL: check if gimbal can be free from precland
-            GL --> ORB: pub gimbal_manager_set_attitude
-            ORB --> VMN: GIMBAL_MANAGER_SET_ATTITUDE ( #282 )
-            VMN --> ML: GIMBAL_DEVICE_SET_ATTITUDE ( #284 )
-            ML --> GDC: GIMBAL_DEVICE_SET_ATTITUDE ( #284 )
+        alt reset gimbal to safe position
+            GL ->> GL: check if gimbal can be free from precland
+            GL ->> VMN: gimbal_manager_set_attitude: look forward
+            VMN ->> GDC: GIMBAL_DEVICE_SET_ATTITUDE
 
-            ORB --> GL: sub gimbal_device_attitude_status
-            GL --> GL: check if gimbal is returned
-            GL --> ORB: pub update gimbal_lock_status
+            GDC ->> GL: GIMBAL_DEVICE_ATTITUDE_STATUS
+            GL ->> GL: check if gimbal is looking forward
 
         end
         end

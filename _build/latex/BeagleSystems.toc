@@ -23,5 +23,8 @@
 \contentsline {subsubsection}{mqtt\_bridge.mqtt\_client module}{12}{subsubsection*.16}%
 \contentsline {subsubsection}{mqtt\_bridge.util module}{12}{subsubsection*.19}%
 \contentsline {subsubsection}{Module contents}{12}{subsubsection*.23}%
-\contentsline {chapter}{Python Module Index}{13}{section*.24}%
-\contentsline {chapter}{Index}{15}{section*.25}%
+\contentsline {chapter}{\numberline {4}Precision Landing}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Precision Landing State Machine}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Precision Landing Integration with Gimbal Camera}{13}{section.4.2}%
+\contentsline {chapter}{Python Module Index}{15}{section*.24}%
+\contentsline {chapter}{Index}{17}{section*.25}%

@@ -13,3 +13,4 @@ Welcome to BeagleSystems Software documentation!
    source/howtos
    source/hardware
    source/reference
+   source/precland

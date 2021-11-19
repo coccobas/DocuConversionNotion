@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.16)  16 NOV 2021 16:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.16)  19 NOV 2021 15:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -746,11 +746,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 715--715
 []\T1/ptm/m/it/10 params\T1/ptm/m/n/10 , \T1/ptm/m/it/10 pri-
  []
 
-[12] [13
+[12]
+Chapter 4.
+[13
+
+] [14
+
+] [15
 
 
-
-] (./BeagleSystems.ind [14
+] (./BeagleSystems.ind [16
 
 
 ]
@@ -777,23 +782,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 63--64
 n
  []
 
-[15
+[17
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 772.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 772.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 781.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 781.
  (./BeagleSystems.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 772.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 772.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 781.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 781.
 Package rerunfilecheck Info: File `BeagleSystems.out' has not changed.
-(rerunfilecheck)             Checksum: 816D15FC4715EE6ED608745E28FA7ABE;2680.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 772.
+(rerunfilecheck)             Checksum: 816E707A314EEC2F0C45C4CB71527AB6;3341.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 781.
  ) 
 Here is how much of TeX's memory you used:
- 13629 strings out of 483183
- 194212 string characters out of 5966291
- 516384 words of memory out of 5000000
- 28220 multiletter control sequences out of 15000+600000
+ 13643 strings out of 483183
+ 194618 string characters out of 5966291
+ 516736 words of memory out of 5000000
+ 28229 multiletter control sequences out of 15000+600000
  591947 words of font info for 104 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  38i,15n,49p,989b,490s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -808,10 +813,10 @@ re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on BeagleSystems.pdf (19 pages, 163364 bytes).
+Output written on BeagleSystems.pdf (21 pages, 164991 bytes).
 PDF statistics:
- 314 PDF objects out of 1000 (max. 8388607)
- 274 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
- 173 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 338 PDF objects out of 1000 (max. 8388607)
+ 296 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 197 words of extra memory for PDF output out of 10000 (max. 10000000)
 

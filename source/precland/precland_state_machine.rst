@@ -31,9 +31,9 @@ Precision Landing State Machine
                 Fallback: run_state_fallback
             State Done
 
-            start --> HorizontalApproach: if in Opportunistic/Required mode target visible 
-            start --> Fallback: if in Opportunistic mode target not visible 
-            start --> Search: if in Required mode target not visible 
+            start --> HorizontalApproach: if in Opportunistic/Required mode target visible
+            start --> Fallback: if in Opportunistic mode target not visible
+            start --> Search: if in Required mode target not visible
 
             start : check_state_conditions
             HorizontalApproach : check_state_conditions
