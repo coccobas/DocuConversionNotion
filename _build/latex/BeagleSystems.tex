@@ -338,6 +338,14 @@ eh2000 \PYG{n+nb}{test} lookleft
 eh2000 \PYG{n+nb}{test} lookright
 \end{sphinxVerbatim}
 
+We provide commands to test the camera zoomed in (50mm) and zoomed out (16mm) and automatically focussed:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+eh2000 \PYG{n+nb}{test} zoomin
+eh2000 \PYG{n+nb}{test} zoomout
+eh2000 \PYG{n+nb}{test} focus
+\end{sphinxVerbatim}
+
 Prepare the camera for precision landing, which includes the following commands:
 \begin{itemize}
 \item {} 
@@ -365,11 +373,7 @@ eh2000 \PYG{n+nb}{test} profile\PYGZus{}auto
 eh2000 \PYG{n+nb}{test} profile\PYGZus{}shutter
 \end{sphinxVerbatim}
 
-Important!! In the current state, we do not set the save path automatically. Make sure to run the following command after ssh’ing to the drone:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/configManager.cgi?action=setSavePath\PYGZam{}path=1\PYGZdq{}}
-\end{sphinxVerbatim}
+Be aware that these commands do certain other things: They flash the SD card and set the save path, so that images are written to the SD card.
 
 As a fallback option, ssh to the drone and run these commands:
 

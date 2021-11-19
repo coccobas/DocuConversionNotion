@@ -201,6 +201,12 @@ camera_trigger test_interval stop
 eh2000 <span class="nb">test</span> lookright
 </pre></div>
 </div>
+<p>We provide commands to test the camera zoomed in (50mm) and zoomed out (16mm) and automatically focussed:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>eh2000 <span class="nb">test</span> zoomin
+eh2000 <span class="nb">test</span> zoomout
+eh2000 <span class="nb">test</span> focus
+</pre></div>
+</div>
 <p>Prepare the camera for precision landing, which includes the following commands:</p>
 <ul class="simple">
 <li><p>zoom out (<a class="reference external" href="https://mavlink.io/en/messages/common.html#MAV_CMD_SET_CAMERA_ZOOM">MAV_CMD_SET_CAMERA_ZOOM</a>)</p></li>
@@ -216,10 +222,7 @@ eh2000 <span class="nb">test</span> lookright
 eh2000 <span class="nb">test</span> profile_shutter
 </pre></div>
 </div>
-<p>Important!! In the current state, we do not set the save path automatically. Make sure to run the following command after ssh’ing to the drone:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setSavePath&amp;path=1&quot;</span>
-</pre></div>
-</div>
+<p>Be aware that these commands do certain other things: They flash the SD card and set the save path, so that images are written to the SD card.</p>
 <p>As a fallback option, ssh to the drone and run these commands:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format the SD card</span>
 curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=formatMedia&quot;</span>

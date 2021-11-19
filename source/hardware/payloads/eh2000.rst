@@ -44,6 +44,14 @@ Make the camera look left/right with a pitch of 45 degrees down:
    eh2000 test lookleft
    eh2000 test lookright
 
+We provide commands to test the camera zoomed in (50mm) and zoomed out (16mm) and automatically focussed:
+
+.. code-block:: sh
+
+   eh2000 test zoomin
+   eh2000 test zoomout
+   eh2000 test focus
+
 Prepare the camera for precision landing, which includes the following commands:
 
 - zoom out (:mavlink:`MAV_CMD_SET_CAMERA_ZOOM`)
@@ -62,11 +70,7 @@ We prepared some profiles for the camera:
    eh2000 test profile_auto
    eh2000 test profile_shutter
 
-Important!! In the current state, we do not set the save path automatically. Make sure to run the following command after ssh'ing to the drone:
-
-.. code-block:: sh
-
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setSavePath&path=1"
+Be aware that these commands do certain other things: They flash the SD card and set the save path, so that images are written to the SD card.
 
 As a fallback option, ssh to the drone and run these commands:
 
