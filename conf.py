@@ -46,7 +46,8 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks',
-#    'sphinxcontrib.mermaid', -- does not work anymore??
+    'sphinx.ext.graphviz',
+    'sphinxcontrib.mermaid',
     'sphinxcontrib.jinja',
     'sphinxcontrib.napoleon',
     'custom',
