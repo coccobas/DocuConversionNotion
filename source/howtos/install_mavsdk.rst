@@ -6,10 +6,9 @@ Compile and install MAVSDK
    sudo apt-get install build-essential cmake git
    sudo pip3 install protoc_gen_mavsdk
    cd ~/Development/beaglesystems
-   git clone git@github.com:BeagleSystems/MAVSDK --recursive
+   git clone git@github.com:BeagleSystems/MAVSDK -b develop --recursive
    cd MAVSDK
    cmake -Bbuild/default -DCMAKE_BUILD_TYPE=Release -H.
-   cmake --build build/default -j8
    sudo cmake --build build/default --target install
 
 If modifying the proto files, make sure to generate the corresponding .h and .cpp files:
@@ -30,8 +29,10 @@ To install MAVSDK-Python:
 
 .. code-block:: sh
 
-   git clone git@github.co:BeagleSystems/MAVSDK-Python --recursive
+   git clone git@github.com:BeagleSystems/MAVSDK-Python --recursive
    cd MAVSDK-Python
+   sudo pip3 install -r requirements.txt
+   sudo pip3 install -r requirements-dev.txt
    ./other/tools/run_protoc.sh
    cp ../MAVSDK/build/default/src/mavsdk_server/src/mavsdk_server mavsdk/bin/
    MAVSDK_BUILD_PURE=ON python3 setup.py build

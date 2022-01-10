@@ -2,6 +2,17 @@
 EH2000
 ######
 
+Network configuration
+=====================
+
+```
+sudo nmcli con add type ethernet ifname enx00e04c68020a con-name EH2000
+sudo nmcli con mod EH2000 ipv4.address 192.168.42.1/16
+sudo nmcli con mod EH2000 ipv4.method manual
+sudo nmcli con mod EH2000 connection.autoconnect yes
+sudo nmcli con up EH2000
+```
+
 Test commands for the NuttX shell
 =================================
 
