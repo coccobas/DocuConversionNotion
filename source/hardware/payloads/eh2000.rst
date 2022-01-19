@@ -139,8 +139,9 @@ Video Streaming Setting
  
  .. code-block:: sh
  
- 	ci"
- 
+ 	" ci" "
+   #without the first and last "
+   
  change the IP Address to designated IP Address, double check your IP address.
  
  Exit from the insert mode by pressing ESC and save the file
