@@ -5,61 +5,61 @@
 \let\spxextra \sphinxstyleindexextra
 
   \bigletter B
-  \item \spxentry{Bridge}\spxextra{class in mqtt\_bridge.bridge}, \hyperpage{10}
+  \item \spxentry{Bridge}\spxextra{class in mqtt\_bridge.bridge}, \hyperpage{12}
 
   \indexspace
   \bigletter C
-  \item \spxentry{create\_bridge()}\spxextra{in module mqtt\_bridge.bridge}, \hyperpage{11}
+  \item \spxentry{create\_bridge()}\spxextra{in module mqtt\_bridge.bridge}, \hyperpage{13}
   \item \spxentry{create\_private\_path\_extractor()}\spxextra{in module mqtt\_bridge.mqtt\_client}, 
-		\hyperpage{12}
+		\hyperpage{14}
 
   \indexspace
   \bigletter D
   \item \spxentry{default\_mqtt\_client\_factory()}\spxextra{in module mqtt\_bridge.mqtt\_client}, 
-		\hyperpage{12}
+		\hyperpage{14}
 
   \indexspace
   \bigletter E
-  \item \spxentry{extract\_values()}\spxextra{in module mqtt\_bridge.util}, \hyperpage{12}
+  \item \spxentry{extract\_values()}\spxextra{in module mqtt\_bridge.util}, \hyperpage{14}
 
   \indexspace
   \bigletter I
-  \item \spxentry{is\_service()}\spxextra{mqtt\_bridge.bridge.Bridge static method}, \hyperpage{10}
+  \item \spxentry{is\_service()}\spxextra{mqtt\_bridge.bridge.Bridge static method}, \hyperpage{12}
   \item \spxentry{is\_service()}\spxextra{mqtt\_bridge.bridge.RosToMqttServiceBridge static method}, 
-		\hyperpage{11}
+		\hyperpage{13}
 
   \indexspace
   \bigletter L
-  \item \spxentry{lookup\_object()}\spxextra{in module mqtt\_bridge.util}, \hyperpage{12}
+  \item \spxentry{lookup\_object()}\spxextra{in module mqtt\_bridge.util}, \hyperpage{14}
 
   \indexspace
   \bigletter M
   \item \spxentry{module}
-    \subitem \spxentry{mqtt\_bridge}, \hyperpage{12}
-    \subitem \spxentry{mqtt\_bridge.app}, \hyperpage{10}
-    \subitem \spxentry{mqtt\_bridge.bridge}, \hyperpage{10}
-    \subitem \spxentry{mqtt\_bridge.mqtt\_client}, \hyperpage{12}
-    \subitem \spxentry{mqtt\_bridge.util}, \hyperpage{12}
+    \subitem \spxentry{mqtt\_bridge}, \hyperpage{14}
+    \subitem \spxentry{mqtt\_bridge.app}, \hyperpage{12}
+    \subitem \spxentry{mqtt\_bridge.bridge}, \hyperpage{12}
+    \subitem \spxentry{mqtt\_bridge.mqtt\_client}, \hyperpage{14}
+    \subitem \spxentry{mqtt\_bridge.util}, \hyperpage{14}
   \item \spxentry{mqtt\_bridge}
-    \subitem \spxentry{module}, \hyperpage{12}
+    \subitem \spxentry{module}, \hyperpage{14}
   \item \spxentry{mqtt\_bridge.app}
-    \subitem \spxentry{module}, \hyperpage{10}
+    \subitem \spxentry{module}, \hyperpage{12}
   \item \spxentry{mqtt\_bridge.bridge}
-    \subitem \spxentry{module}, \hyperpage{10}
+    \subitem \spxentry{module}, \hyperpage{12}
   \item \spxentry{mqtt\_bridge.mqtt\_client}
-    \subitem \spxentry{module}, \hyperpage{12}
+    \subitem \spxentry{module}, \hyperpage{14}
   \item \spxentry{mqtt\_bridge.util}
-    \subitem \spxentry{module}, \hyperpage{12}
-  \item \spxentry{mqtt\_bridge\_node()}\spxextra{in module mqtt\_bridge.app}, \hyperpage{10}
-  \item \spxentry{MqttToRosBridge}\spxextra{class in mqtt\_bridge.bridge}, \hyperpage{10}
+    \subitem \spxentry{module}, \hyperpage{14}
+  \item \spxentry{mqtt\_bridge\_node()}\spxextra{in module mqtt\_bridge.app}, \hyperpage{12}
+  \item \spxentry{MqttToRosBridge}\spxextra{class in mqtt\_bridge.bridge}, \hyperpage{12}
 
   \indexspace
   \bigletter P
-  \item \spxentry{populate\_instance()}\spxextra{in module mqtt\_bridge.util}, \hyperpage{12}
+  \item \spxentry{populate\_instance()}\spxextra{in module mqtt\_bridge.util}, \hyperpage{14}
 
   \indexspace
   \bigletter R
-  \item \spxentry{RosToMqttBridge}\spxextra{class in mqtt\_bridge.bridge}, \hyperpage{11}
-  \item \spxentry{RosToMqttServiceBridge}\spxextra{class in mqtt\_bridge.bridge}, \hyperpage{11}
+  \item \spxentry{RosToMqttBridge}\spxextra{class in mqtt\_bridge.bridge}, \hyperpage{13}
+  \item \spxentry{RosToMqttServiceBridge}\spxextra{class in mqtt\_bridge.bridge}, \hyperpage{13}
 
 \end{sphinxtheindex}

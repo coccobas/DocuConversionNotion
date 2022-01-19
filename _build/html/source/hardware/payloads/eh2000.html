@@ -93,7 +93,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../hardware.html">Hardware</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../payloads.html">Payloads</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">EH2000</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#network-configuration">Network configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#test-commands-for-the-nuttx-shell">Test commands for the NuttX shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#video-streaming-setting">Video Streaming Setting</a></li>
 </ul>
 </li>
 </ul>
@@ -175,6 +177,16 @@
             
   <div class="section" id="eh2000">
 <h1>EH2000<a class="headerlink" href="#eh2000" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="network-configuration">
+<h2>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo nmcli con add <span class="nb">type</span> ethernet ifname enx00e04c68020a con-name EH2000
+sudo nmcli con mod EH2000 ipv4.address <span class="m">192</span>.168.42.1/16
+sudo nmcli con mod EH2000 ipv4.method manual
+sudo nmcli con mod EH2000 connection.autoconnect yes
+sudo nmcli con up EH2000
+</pre></div>
+</div>
+</div>
 <div class="section" id="test-commands-for-the-nuttx-shell">
 <h2>Test commands for the NuttX shell<a class="headerlink" href="#test-commands-for-the-nuttx-shell" title="Permalink to this headline">¶</a></h2>
 <p>Get the device information and reported feedback from the gimbal:</p>
@@ -247,6 +259,48 @@ curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cg
 curl -G <span class="s2">&quot;http://192.168.42.108:80/cgi-bin/configManager.cgi?action=capture&amp;mode=0&quot;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="video-streaming-setting">
+<h2>Video Streaming Setting<a class="headerlink" href="#video-streaming-setting" title="Permalink to this headline">¶</a></h2>
+<ol class="upperalpha simple">
+<li><p>Set the destination IP Address</p></li>
+</ol>
+<p>Go to launch folder and open foxtech_eh2000.launch file</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Development/BeagleComrade/launch/
+     vim foxtech_eh2000.launch
+</pre></div>
+</div>
+<p>Locate the IP Address line</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/dst_addr
+</pre></div>
+</div>
+</div></blockquote>
+<p>Move the cursor to the IP Address value (use l or arrow keys) and type</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>     ci<span class="s2">&quot;</span>
+<span class="s2"># with the &quot;</span> !
+</pre></div>
+</div>
+<p>Change the IP Address to designated IP Address, double check your IP address.</p>
+<p>Exit from the insert mode by pressing ESC and save the file</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># save changes and exit</span>
+:wq
+<span class="c1"># discard changes and exit</span>
+:q!
+</pre></div>
+</div>
+<p>Restart the service</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl restart beagle
+</pre></div>
+</div>
+<ol class="upperalpha simple" start="2">
+<li><p>Set up QGroundControl</p></li>
+</ol>
+<ol class="arabic simple">
+<li><p>Go to General Page under Application Setting.</p></li>
+<li><p>Set the video stream to UDP H264..</p></li>
+<li><p>Change the port to 8554.</p></li>
+</ol>
 </div>
 </div>
 

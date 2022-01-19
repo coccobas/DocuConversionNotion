@@ -9,22 +9,24 @@
 \contentsline {chapter}{\numberline {2}Hardware}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Payloads}{5}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}EH2000}{5}{subsection.2.1.1}%
-\contentsline {subsubsection}{Test commands for the NuttX shell}{5}{subsubsection*.3}%
-\contentsline {chapter}{\numberline {3}Reference}{7}{chapter.3}%
-\contentsline {section}{\numberline {3.1}ROS Messages}{8}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}ROS message definitions}{8}{subsection.3.1.1}%
-\contentsline {section}{\numberline {3.2}MQTT interface}{9}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}MQTT interface configuration}{10}{subsection.3.2.1}%
-\contentsline {section}{\numberline {3.3}mqtt\_bridge}{10}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}mqtt\_bridge package}{10}{subsection.3.3.1}%
-\contentsline {subsubsection}{Submodules}{10}{subsubsection*.5}%
-\contentsline {subsubsection}{mqtt\_bridge.app module}{10}{subsubsection*.6}%
-\contentsline {subsubsection}{mqtt\_bridge.bridge module}{10}{subsubsection*.8}%
-\contentsline {subsubsection}{mqtt\_bridge.mqtt\_client module}{12}{subsubsection*.16}%
-\contentsline {subsubsection}{mqtt\_bridge.util module}{12}{subsubsection*.19}%
-\contentsline {subsubsection}{Module contents}{12}{subsubsection*.23}%
-\contentsline {chapter}{\numberline {4}Precision Landing}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Precision Landing State Machine}{13}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Precision Landing Integration with Gimbal Camera}{13}{section.4.2}%
-\contentsline {chapter}{Python Module Index}{15}{section*.24}%
-\contentsline {chapter}{Index}{17}{section*.25}%
+\contentsline {subsubsection}{Network configuration}{5}{subsubsection*.3}%
+\contentsline {subsubsection}{Test commands for the NuttX shell}{5}{subsubsection*.4}%
+\contentsline {subsubsection}{Video Streaming Setting}{7}{subsubsection*.5}%
+\contentsline {chapter}{\numberline {3}Reference}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}ROS Messages}{10}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}ROS message definitions}{10}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}MQTT interface}{11}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}MQTT interface configuration}{12}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}mqtt\_bridge}{12}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}mqtt\_bridge package}{12}{subsection.3.3.1}%
+\contentsline {subsubsection}{Submodules}{12}{subsubsection*.7}%
+\contentsline {subsubsection}{mqtt\_bridge.app module}{12}{subsubsection*.8}%
+\contentsline {subsubsection}{mqtt\_bridge.bridge module}{12}{subsubsection*.10}%
+\contentsline {subsubsection}{mqtt\_bridge.mqtt\_client module}{14}{subsubsection*.18}%
+\contentsline {subsubsection}{mqtt\_bridge.util module}{14}{subsubsection*.21}%
+\contentsline {subsubsection}{Module contents}{14}{subsubsection*.25}%
+\contentsline {chapter}{\numberline {4}Precision Landing}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Precision Landing State Machine}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Precision Landing Integration with Gimbal Camera}{15}{section.4.2}%
+\contentsline {chapter}{Python Module Index}{17}{section*.26}%
+\contentsline {chapter}{Index}{19}{section*.27}%

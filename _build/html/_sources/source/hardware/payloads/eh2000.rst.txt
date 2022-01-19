@@ -2,6 +2,17 @@
 EH2000
 ######
 
+Network configuration
+=====================
+
+.. code-block:: sh
+
+   sudo nmcli con add type ethernet ifname enx00e04c68020a con-name EH2000
+   sudo nmcli con mod EH2000 ipv4.address 192.168.42.1/16
+   sudo nmcli con mod EH2000 ipv4.method manual
+   sudo nmcli con mod EH2000 connection.autoconnect yes
+   sudo nmcli con up EH2000
+
 Test commands for the NuttX shell
 =================================
 
@@ -94,3 +105,51 @@ As a fallback option, ssh to the drone and run these commands:
    curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setSavePath&path=1"
    # Do a single capture
    curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=capture&mode=0"
+
+Video Streaming Setting
+=======================
+ 
+A. Set the destination IP Address
+ 
+Go to launch folder and open foxtech_eh2000.launch file
+ 
+.. code-block:: sh
+ 
+   cd ~/Development/BeagleComrade/launch/	
+ 	vim foxtech_eh2000.launch
+ 
+Locate the IP Address line
+ 
+ .. code-block:: sh
+ 	
+ 	/dst_addr
+ 
+Move the cursor to the IP Address value (use l or arrow keys) and type
+ 
+.. code-block:: sh
+ 
+ 	ci"
+   # with the " !
+   
+Change the IP Address to designated IP Address, double check your IP address.
+
+Exit from the insert mode by pressing ESC and save the file
+ 
+.. code-block:: sh
+ 
+   # save changes and exit
+   :wq
+   # discard changes and exit
+   :q!
+ 
+Restart the service
+ 
+.. code-block:: sh
+ 
+   sudo systemctl restart beagle
+ 
+B. Set up QGroundControl
+
+1. Go to General Page under Application Setting.
+2. Set the video stream to UDP H264..
+3. Change the port to 8554. 

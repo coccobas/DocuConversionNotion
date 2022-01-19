@@ -76,7 +76,7 @@
     
 
 \title{BeagleSystems Documentation}
-\date{Nov 19, 2021}
+\date{Jan 19, 2022}
 \release{}
 \author{BeagleSystems GmbH}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -297,6 +297,17 @@ USB devices can fail if the voltage drops below 5V. To check the voltage on Jets
 \subsection{EH2000}
 \label{\detokenize{source/hardware/payloads/eh2000:eh2000}}\label{\detokenize{source/hardware/payloads/eh2000::doc}}
 
+\subsubsection{Network configuration}
+\label{\detokenize{source/hardware/payloads/eh2000:network-configuration}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+sudo nmcli con add \PYG{n+nb}{type} ethernet ifname enx00e04c68020a con\PYGZhy{}name EH2000
+sudo nmcli con mod EH2000 ipv4.address \PYG{l+m}{192}.168.42.1/16
+sudo nmcli con mod EH2000 ipv4.method manual
+sudo nmcli con mod EH2000 connection.autoconnect yes
+sudo nmcli con up EH2000
+\end{sphinxVerbatim}
+
+
 \subsubsection{Test commands for the NuttX shell}
 \label{\detokenize{source/hardware/payloads/eh2000:test-commands-for-the-nuttx-shell}}
 Get the device information and reported feedback from the gimbal:
@@ -399,6 +410,72 @@ curl \PYGZhy{}G \PYG{l+s+s2}{\PYGZdq{}http://192.168.42.108:80/cgi\PYGZhy{}bin/c
 \end{sphinxVerbatim}
 
 
+\subsubsection{Video Streaming Setting}
+\label{\detokenize{source/hardware/payloads/eh2000:video-streaming-setting}}\begin{enumerate}
+\sphinxsetlistlabels{\Alph}{enumi}{enumii}{}{.}%
+\item {} 
+Set the destination IP Address
+
+\end{enumerate}
+
+Go to launch folder and open foxtech\_eh2000.launch file
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{cd} \PYGZti{}/Development/BeagleComrade/launch/
+vim foxtech\PYGZus{}eh2000.launch
+\end{sphinxVerbatim}
+
+Locate the IP Address line
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/dst\PYGZus{}addr
+\end{sphinxVerbatim}
+\end{quote}
+
+Move the cursor to the IP Address value (use l or arrow keys) and type
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+ci\PYG{l+s+s2}{\PYGZdq{}}
+\end{sphinxVerbatim}
+
+Change the IP Address to designated IP Address, double check your IP address.
+
+Exit from the insert mode by pressing ESC and save the file
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} save changes and exit}
+:wq
+\PYG{c+c1}{\PYGZsh{} discard changes and exit}
+:q!
+\end{sphinxVerbatim}
+
+Restart the service
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+sudo systemctl restart beagle
+\end{sphinxVerbatim}
+\begin{enumerate}
+\sphinxsetlistlabels{\Alph}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{1}
+\item {} 
+Set up QGroundControl
+
+\end{enumerate}
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+Go to General Page under Application Setting.
+
+\item {} 
+Set the video stream to UDP H264..
+
+\item {} 
+Change the port to 8554.
+
+\end{enumerate}
+
+
 \chapter{Reference}
 \label{\detokenize{source/reference:reference}}\label{\detokenize{source/reference::doc}}
 \begin{landscape}
@@ -448,7 +525,7 @@ string data
 \label{\detokenize{source/mqtt_interface:mqtt-interface}}\label{\detokenize{source/mqtt_interface:id1}}\label{\detokenize{source/mqtt_interface::doc}}
 Connecting to MQTT
 
-The MQTT broker is hosted on 40.87.148.13:1883.
+The MQTT broker is hosted on 18.196.92.225:1883.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -499,7 +576,7 @@ house/+/rtcm/+/raw
     \PYG{n}{protocol}\PYG{p}{:} \PYG{l+m+mi}{4}      \PYG{c+c1}{\PYGZsh{} MQTTv311}
     \PYG{n}{client\PYGZus{}id\PYGZus{}from\PYGZus{}mac}\PYG{p}{:} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{eth2}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{eno1}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{eth1}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{eth0}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
   \PYG{n}{connection}\PYG{p}{:}
-    \PYG{n}{host}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{40.87.148.13}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{n}{host}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{18.196.92.225}\PYG{l+s+s2}{\PYGZdq{}}
     \PYG{n}{port}\PYG{p}{:} \PYG{l+m+mi}{1883}
     \PYG{n}{keepalive}\PYG{p}{:} \PYG{l+m+mi}{10}
   \PYG{n}{account}\PYG{p}{:}
