@@ -116,20 +116,19 @@ Go to launch folder and open foxtech_eh2000.launch file
 .. code-block:: sh
  
    cd ~/Development/BeagleComrade/launch/	
- 	vim foxtech_eh2000.launch
+   vim foxtech_eh2000.launch
  
 Locate the IP Address line
  
  .. code-block:: sh
  	
- 	/dst_addr
+   /dst_addr
  
 Move the cursor to the IP Address value (use l or arrow keys) and type
  
 .. code-block:: sh
  
- 	ci"
-   # with the " !
+   ci"
    
 Change the IP Address to designated IP Address, double check your IP address.
 

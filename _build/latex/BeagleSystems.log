@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.16)  19 JAN 2022 15:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.16)  28 JAN 2022 12:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -685,78 +685,78 @@ LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 120.
  [1
 
-] [2]
-Overfull \vbox (4.40604pt too high) detected at line 265
+] [2] [3]
+Overfull \vbox (6.9408pt too high) detected at line 346
  []
 
-[3] [4]
-Chapter 2.
-[5
+[4] [5] [6
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 3
-62.
+Chapter 2.
+[7]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 4
+43.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [6] [7] [8
+) [8] [9] [10
 
 ]
 Chapter 3.
-[9] [10
+[11] [12
 
-] [11
+] [13
 
 
 ]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 630.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 711.
 
-Underfull \hbox (badness 10000) in paragraph at lines 653--653
+Underfull \hbox (badness 10000) in paragraph at lines 734--734
 \T1/ptm/m/it/10 qos=2\T1/ptm/m/n/10 , \T1/ptm/m/it/10 queue_size=10\T1/ptm/m/n/
 10 , \T1/ptm/m/it/10 wild-cards=None\T1/ptm/m/n/10 ,
  []
 
-[12
+[14
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 689--689
+Underfull \hbox (badness 10000) in paragraph at lines 770--770
 []\T1/ptm/m/it/10 topic_from\T1/ptm/m/n/10 , \T1/ptm/m/it/10 topic_to\T1/ptm/m/
 n/10 , \T1/ptm/m/it/10 msg_type\T1/ptm/m/n/10 , \T1/ptm/m/it/10 fre-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 689--689
+Underfull \hbox (badness 10000) in paragraph at lines 770--770
 \T1/ptm/m/it/10 quency=None\T1/ptm/m/n/10 , \T1/ptm/m/it/10 qos=2\T1/ptm/m/n/10
  , \T1/ptm/m/it/10 re-tain=False\T1/ptm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 689--689
+Underfull \hbox (badness 10000) in paragraph at lines 770--770
 \T1/ptm/m/it/10 delete_retained_on_shutdown=False\T1/ptm/m/n/10 , \T1/ptm/m/it/
 10 wild-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 689--689
+Underfull \hbox (badness 10000) in paragraph at lines 770--770
 \T1/ptm/m/it/10 cards=None\T1/ptm/m/n/10 , \T1/ptm/m/it/10 drop=None\T1/ptm/m/n
 /10 , \T1/ptm/m/it/10 times-tamp=False\T1/ptm/m/n/10 ,
  []
 
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 792--792
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 873--873
 []\T1/ptm/m/it/10 params\T1/ptm/m/n/10 , \T1/ptm/m/it/10 pri-
  []
 
-[14]
+[16]
 Chapter 4.
-[15
+[17
 
-] [16
+] [18
 
-] [17
+] [19
 
 
-] (./BeagleSystems.ind [18
+] (./BeagleSystems.ind [20
 
 
 ]
@@ -783,23 +783,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 63--64
 n
  []
 
-[19
+[21
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 858.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 858.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 939.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 939.
  (./BeagleSystems.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 858.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 858.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 939.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 939.
 Package rerunfilecheck Info: File `BeagleSystems.out' has not changed.
-(rerunfilecheck)             Checksum: D0E847719D350279AA29204EF5CFDA2C;3341.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 858.
+(rerunfilecheck)             Checksum: 5000A729C601A477D3E1D979629897E3;3889.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 939.
  ) 
 Here is how much of TeX's memory you used:
- 13654 strings out of 483183
- 194808 string characters out of 5966291
- 516860 words of memory out of 5000000
- 28231 multiletter control sequences out of 15000+600000
+ 13664 strings out of 483183
+ 195120 string characters out of 5966291
+ 513132 words of memory out of 5000000
+ 28237 multiletter control sequences out of 15000+600000
  591947 words of font info for 104 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  38i,15n,49p,989b,490s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -814,10 +814,10 @@ re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on BeagleSystems.pdf (23 pages, 167499 bytes).
+Output written on BeagleSystems.pdf (25 pages, 171384 bytes).
 PDF statistics:
- 356 PDF objects out of 1000 (max. 8388607)
- 311 compressed objects within 4 object streams
- 76 named destinations out of 1000 (max. 500000)
- 197 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 329 compressed objects within 4 object streams
+ 80 named destinations out of 1000 (max. 500000)
+ 213 words of extra memory for PDF output out of 10000 (max. 10000000)
 

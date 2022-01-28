@@ -76,7 +76,7 @@
     
 
 \title{BeagleSystems Documentation}
-\date{Jan 19, 2022}
+\date{Jan 28, 2022}
 \release{}
 \author{BeagleSystems GmbH}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -141,6 +141,87 @@ Create the file \textasciitilde{}/.beaglerc with the following content.
 
 sudo apt\sphinxhyphen{}get install libconfuse\sphinxhyphen{}dev
 \end{quote}
+
+
+\section{Compile and install MAVSDK}
+\label{\detokenize{source/howtos/install_mavsdk:compile-and-install-mavsdk}}\label{\detokenize{source/howtos/install_mavsdk::doc}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+sudo apt\PYGZhy{}get install build\PYGZhy{}essential cmake git
+sudo pip3 install protoc\PYGZus{}gen\PYGZus{}mavsdk
+\PYG{n+nb}{cd} \PYGZti{}/Development/beaglesystems
+git clone git@github.com:BeagleSystems/MAVSDK \PYGZhy{}b develop \PYGZhy{}\PYGZhy{}recursive
+\PYG{n+nb}{cd} MAVSDK
+cmake \PYGZhy{}Bbuild/default \PYGZhy{}DCMAKE\PYGZus{}BUILD\PYGZus{}TYPE\PYG{o}{=}Release \PYGZhy{}H.
+sudo cmake \PYGZhy{}\PYGZhy{}build build/default \PYGZhy{}\PYGZhy{}target install
+\end{sphinxVerbatim}
+
+If modifying the proto files, make sure to generate the corresponding .h and .cpp files:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+cmake \PYGZhy{}DCMAKE\PYGZus{}BUILD\PYGZus{}TYPE\PYG{o}{=}Release \PYGZhy{}DBUILD\PYGZus{}SHARED\PYGZus{}LIBS\PYG{o}{=}OFF \PYGZhy{}DBUILD\PYGZus{}MAVSDK\PYGZus{}SERVER\PYG{o}{=}ON \PYGZhy{}Bbuild/default \PYGZhy{}H. \PYG{o}{\PYGZam{}\PYGZam{}} tools/generate\PYGZus{}from\PYGZus{}protos.sh \PYG{o}{\PYGZam{}\PYGZam{}} tools/fix\PYGZus{}style.sh .
+cmake \PYGZhy{}\PYGZhy{}build build/default \PYGZhy{}j8 \PYG{o}{\PYGZam{}\PYGZam{}} sudo cmake \PYGZhy{}\PYGZhy{}build build/default \PYGZhy{}\PYGZhy{}target install
+\end{sphinxVerbatim}
+
+To compile an example (e.g. logfile\_download), go to the ./examples/logfile\_download directory and run the following:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+cmake \PYGZhy{}Bbuild \PYGZhy{}H. \PYG{o}{\PYGZam{}\PYGZam{}} cmake \PYGZhy{}\PYGZhy{}build build \PYGZhy{}j4 \PYG{o}{\PYGZam{}\PYGZam{}} ./build/logfile\PYGZus{}download udp://:24541
+\end{sphinxVerbatim}
+
+To install MAVSDK\sphinxhyphen{}Python:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+git clone git@github.com:BeagleSystems/MAVSDK\PYGZhy{}Python \PYGZhy{}\PYGZhy{}recursive
+\PYG{n+nb}{cd} MAVSDK\PYGZhy{}Python
+sudo pip3 install \PYGZhy{}r requirements.txt
+sudo pip3 install \PYGZhy{}r requirements\PYGZhy{}dev.txt
+./other/tools/run\PYGZus{}protoc.sh
+cp ../MAVSDK/build/default/src/mavsdk\PYGZus{}server/src/mavsdk\PYGZus{}server mavsdk/bin/
+\PYG{n+nv}{MAVSDK\PYGZus{}BUILD\PYGZus{}PURE}\PYG{o}{=}ON python3 setup.py build
+pip3 install \PYGZhy{}e .
+\end{sphinxVerbatim}
+
+
+\section{Install Zephyr Apps on embedded devices like the Nucleo}
+\label{\detokenize{source/howtos/install_zephyr_apps:install-zephyr-apps-on-embedded-devices-like-the-nucleo}}\label{\detokenize{source/howtos/install_zephyr_apps::doc}}
+Run the following installation process on an Ubuntu 20.04 computer:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+sudo apt update
+sudo apt install \PYGZhy{}\PYGZhy{}no\PYGZhy{}install\PYGZhy{}recommends git cmake ninja\PYGZhy{}build gperf   ccache dfu\PYGZhy{}util device\PYGZhy{}tree\PYGZhy{}compiler wget   python3\PYGZhy{}dev python3\PYGZhy{}pip python3\PYGZhy{}setuptools python3\PYGZhy{}tk python3\PYGZhy{}wheel xz\PYGZhy{}utils file   make gcc gcc\PYGZhy{}multilib g++\PYGZhy{}multilib libsdl2\PYGZhy{}dev screen
+sudo pip3 install west
+
+\PYG{n+nb}{cd} /tmp
+wget https://github.com/zephyrproject\PYGZhy{}rtos/sdk\PYGZhy{}ng/releases/download/v0.13.2/zephyr\PYGZhy{}sdk\PYGZhy{}0.13.2\PYGZhy{}linux\PYGZhy{}x86\PYGZus{}64\PYGZhy{}setup.run
+chmod +x zephyr\PYGZhy{}sdk\PYGZhy{}0.13.2\PYGZhy{}linux\PYGZhy{}x86\PYGZus{}64\PYGZhy{}setup.run
+./zephyr\PYGZhy{}sdk\PYGZhy{}0.13.2\PYGZhy{}linux\PYGZhy{}x86\PYGZus{}64\PYGZhy{}setup.run \PYGZhy{}\PYGZhy{} \PYGZhy{}d \PYGZti{}/zephyr\PYGZhy{}sdk\PYGZhy{}0.13.2
+
+mkdir \PYGZhy{}p \PYGZti{}/Development/beaglesystems/zephyr
+\PYG{n+nb}{cd} \PYGZti{}/Development/beaglesystems/zephyr
+git clone https://github.com/BeagleSystems/zephyr
+west init \PYGZhy{}m https://github.com/BeagleSystems/zephyr \PYGZhy{}\PYGZhy{}mr develop
+west update
+west zephyr\PYGZhy{}export
+pip3 install \PYGZhy{}\PYGZhy{}user \PYGZhy{}r \PYGZti{}/Development/beaglesystems/zephyr/zephyr/scripts/requirements.txt
+sudo cp \PYGZti{}/zephyr\PYGZhy{}sdk\PYGZhy{}0.13.2/sysroots/x86\PYGZus{}64\PYGZhy{}pokysdk\PYGZhy{}linux/usr/share/openocd/contrib/60\PYGZhy{}openocd.rules /etc/udev/rules.d
+sudo udevadm control \PYGZhy{}\PYGZhy{}reload
+
+\PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}source \PYGZti{}/Development/beaglesystems/zephyr/zephyr/zephyr\PYGZhy{}env.sh\PYGZdq{}} \PYGZgt{}\PYGZgt{} \PYGZti{}/.bashrc
+\PYG{n+nb}{source} \PYGZti{}/.bashrc
+
+\PYG{n+nb}{cd} \PYGZti{}/Development/beaglesystems
+git clone git@github.com:BeagleSystems/zephyr\PYGZus{}apps
+\PYG{n+nb}{cd} zephyr\PYGZus{}apps/eh2000\PYGZus{}mavlink
+./flash.sh
+\end{sphinxVerbatim}
+
+For debugging, you might want to see the debug output from the nucleo:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+screen /dev/ttyACM0 \PYG{l+m}{115200} 8N1
+\end{sphinxVerbatim}
+
+To quit the screen, just type ctrl+a :quit (a colon before quit).
 
 
 \section{Compile the documentation}
