@@ -7,6 +7,8 @@ HowTos
 
    howtos/install
    howtos/install_ftdi4232h
+   howtos/install_mavsdk
+   howtos/install_zephyr_apps
    howtos/compile_documentation
    howtos/debug_px4
    howtos/debug_usb
