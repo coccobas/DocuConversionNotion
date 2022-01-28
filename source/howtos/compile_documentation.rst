@@ -7,15 +7,9 @@ We adhere to the recommendations described on https://www.writethedocs.org/guide
 
    sudo pip3 install sphinxcontrib-mermaid
    sudo pip3 install sphinx-jinja sphinxcontrib-napoleon sphinx-rtd-theme
+   sudo pip3 install git+https://github.com/dayjaby/sphinx-bootstrap-theme
 
-Install sphinx-bootstrap-theme:
-
-.. code-block:: sh
-
-   cd ~/Development/beaglesystems
-   git clone git@github.com:dayjaby/sphinx-bootstrap-theme
-   cd sphinx-bootstrap-theme
-   sudo python3 setup.py install
+   npm install @mermaid-js/mermaid-cli
 
 Modify the CSS:
 
