@@ -1,6 +1,28 @@
 Compile and install MAVSDK
 ==========================
 
+Install MAVSDK by docker/deb
+----------------------------
+
+.. code-block:: sh
+
+   cd ~/Development/beaglesystems/MAVSDK
+   pushd docker
+   docker build -f Dockerfile.dockcross-linux-arm64-custom -t mavsdk/mavsdk-dockcross-linux-arm64-custom .
+   popd
+   docker run --rm mavsdk/mavsdk-dockcross-linux-arm64-custom > ./dockcross-linux-arm64-custom
+   chmod +x ./dockcross-linux-arm64-custom
+   ./docker/dockcross-linux-arm64-custom /bin/bash -c "cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=build/linux-arm64/install -DBUILD_MAVSDK_SERVER=ON -DBUILD_SHARED_LIBS=ON -DWERROR=OFF -Bbuild/linux-arm64 -H."
+   ./docker/dockcross-linux-arm64-custom /bin/bash -c "cmake --build build/linux-arm64 --target install -- -j4"
+   ./docker/dockcross-linux-arm64-custom tools/create_packages.sh ./build/linux-arm64/install . arm64 libmavsdk-dev
+   mv libmavsdk-dev_*_arm64.deb libmavsdk-dev_arm64.deb
+
+   # Deploy it on hangar (TODO use github hosted .deb files, e.g. in release tags):
+   scp libmavsdk-dev_arm64.deb house@10.8.0.66:~/BeagleHouse/addendums/MAVSDK/libmavsdk-dev_arm64.deb
+
+[DEPRECATED] Install MAVSDK by source
+-------------------------------------
+
 .. code-block:: sh
 
    sudo apt-get install build-essential cmake git
@@ -9,14 +31,14 @@ Compile and install MAVSDK
    git clone git@github.com:BeagleSystems/MAVSDK -b develop --recursive
    cd MAVSDK
    cmake -Bbuild/default -DCMAKE_BUILD_TYPE=Release -H.
-   sudo cmake --build build/default --target install
+   sudo cmake --build build/default -j8 --target install
 
 If modifying the proto files, make sure to generate the corresponding .h and .cpp files:
 
 .. code-block:: sh
 
-   cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_MAVSDK_SERVER=ON -Bbuild/default -H. && tools/generate_from_protos.sh && tools/fix_style.sh .
-   cmake --build build/default -j8 && sudo cmake --build build/default --target install
+   cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DBUILD_MAVSDK_SERVER=ON -Bbuild/default -H. && tools/generate_from_protos.sh && tools/fix_style.sh .
+   sudo cmake --build build/default -j8 --target install
 
 
 To compile an example (e.g. logfile_download), go to the ./examples/logfile_download directory and run the following:
