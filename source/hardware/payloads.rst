@@ -6,3 +6,4 @@ Payloads
    :caption: Contents:
 
    payloads/eh2000
+   payloads/sentera6x

@@ -1,17 +1,19 @@
-######
-EH2000
-######
+#######
+Sentera
+#######
 
 Network configuration
 =====================
 
 .. code-block:: sh
 
-   sudo nmcli con add type ethernet ifname enx00e04c68020a con-name EH2000
-   sudo nmcli con mod EH2000 ipv4.address 192.168.42.1/16
-   sudo nmcli con mod EH2000 ipv4.method manual
-   sudo nmcli con mod EH2000 connection.autoconnect yes
-   sudo nmcli con up EH2000
+   sudo nmcli con add type ethernet con-name sentera ifname enx60a4b7b3325a ip4 192.168.5.10/24
+   sudo nmcli con edit sentera
+   set ipv4.method manual
+   set connection.autoconnect yes
+   save
+   quit
+   sudo nmcli con up sentera
 
 Test commands for the NuttX shell
 =================================

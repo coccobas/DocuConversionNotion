@@ -14,8 +14,7 @@ Install MAVSDK by docker/deb
    chmod +x ./dockcross-linux-arm64-custom
    ./docker/dockcross-linux-arm64-custom /bin/bash -c "cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=build/linux-arm64/install -DBUILD_MAVSDK_SERVER=ON -DBUILD_SHARED_LIBS=ON -DWERROR=OFF -Bbuild/linux-arm64 -H."
    ./docker/dockcross-linux-arm64-custom /bin/bash -c "cmake --build build/linux-arm64 --target install -- -j4"
-   ./docker/dockcross-linux-arm64-custom tools/create_packages.sh ./build/linux-arm64/install . arm64 libmavsdk-dev
-   mv libmavsdk-dev_*_arm64.deb libmavsdk-dev_arm64.deb
+   rm *.deb && ./docker/dockcross-linux-arm64-custom tools/create_packages.sh ./build/linux-arm64/install . arm64 libmavsdk-dev && mv libmavsdk-dev_*_arm64.deb libmavsdk-dev_arm64.deb
 
    # Deploy it on hangar (TODO use github hosted .deb files, e.g. in release tags):
    scp libmavsdk-dev_arm64.deb house@10.8.0.66:~/BeagleHouse/addendums/MAVSDK/libmavsdk-dev_arm64.deb
