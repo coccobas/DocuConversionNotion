@@ -1,5 +1,5 @@
 Install the BeagleSystems Software on a drone
-==========================================
+=============================================
 
 To gain access to the repository, we first have to do some setup:
 

@@ -5,9 +5,13 @@ We adhere to the recommendations described on https://www.writethedocs.org/guide
 
 .. code-block:: sh
 
-   sudo pip3 install sphinxcontrib-mermaid
-   sudo pip3 install sphinx-jinja sphinxcontrib-napoleon sphinx-rtd-theme
-   sudo pip3 install git+https://github.com/dayjaby/sphinx-bootstrap-theme
+   git clone git@github.com:BeagleSystems/docs.git
+   cd docs
+   vitualenv --python=python3 venv
+   source venv/bin/activate
+   # in venv
+   pip install -r requirements.txt
+   pip install git+https://github.com/dayjaby/sphinx-bootstrap-theme
 
    npm install @mermaid-js/mermaid-cli
 
