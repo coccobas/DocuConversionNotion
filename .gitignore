@@ -5,3 +5,4 @@ package-lock.json
 _build/*
 */__pycache__/*
 /node_modules
+_extensions/__pycache__/
