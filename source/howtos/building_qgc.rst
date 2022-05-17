@@ -1,12 +1,12 @@
 Building BeagleGroundControl
-=======================
+============================
 
 .. code-block:: sh
 
    cd ~/Development/beaglesystems/BeagleGroundControl
-   docker build --file ./deploy/docker/Dockerfile-build-linux -t qgc-linux-docker .
+   docker build --file ./deploy/docker/Dockerfile-build-linux -t beaglegc-linux-docker .
    mkdir build
-   docker run --rm -v ${PWD}:/project/source -v ${PWD}/build:/project/build qgc-linux-docker
+   docker run --rm -v ${PWD}:/project/source -v ${PWD}/build:/project/build beaglegc-linux-docker
 
 
 Add an alias for start qgc from the build folder

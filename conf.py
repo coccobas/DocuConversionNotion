@@ -18,6 +18,9 @@ sys.path.insert(0, os.path.abspath('../BeagleComrade/src/beaglesystems/camera_tr
 sys.path.insert(0, os.path.abspath('./_extensions'))
 import yaml
 import sphinx_rtd_theme
+import errno
+import sphinx.util.osutil
+sphinx.util.osutil.ENOENT = errno.ENOENT
 
 
 # -- Project information -----------------------------------------------------
