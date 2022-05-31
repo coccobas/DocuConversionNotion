@@ -12,3 +12,4 @@ HowTos
    howtos/compile_documentation
    howtos/debug_px4
    howtos/debug_usb
+   howtos/setup_wifi
