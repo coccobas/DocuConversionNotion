@@ -5,6 +5,7 @@ HowTos
    :maxdepth: 1
    :caption: Contents:
 
+   howtos/building_qgc
    howtos/install
    howtos/install_ftdi4232h
    howtos/install_mavsdk

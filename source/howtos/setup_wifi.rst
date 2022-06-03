@@ -8,6 +8,7 @@ Setup WiFi on the drone
    sudo nmcli con modify HangarCon wifi-sec.psk bestbeagleever
    sudo nmcli con modify HangarCon connection.autoconnect yes
    sudo nmcli con modify HangarCon connection.autoconnect-priority 10
+   sudo nmcli con modify HangarCon ipv4.address 192.168.20.102
    sudo nmcli con up HangarCon
    sudo nmcli device wifi connect BeagleHangar --ask
 
@@ -36,3 +37,4 @@ On the hangar we need a static IP address for the wifi:
 .. code-block:: sh
 
    sudo nmcli con mod "Wired connection 1" ipv4.address 192.168.20.100
+   sudo nmcli con mod "Wired connection 1" ipv4.method manual
