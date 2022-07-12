@@ -6,6 +6,7 @@ HowTos
    :caption: Contents:
 
    howtos/building_qgc
+   howtos/containerization
    howtos/install
    howtos/install_ftdi4232h
    howtos/install_mavsdk
