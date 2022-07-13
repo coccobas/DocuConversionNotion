@@ -6,7 +6,7 @@ Initially, it's necessary to download the certificate from the registry as it us
 ..code-block:: sh
 
    sudo mkdir -p /etc/docker/certs.d/10.8.0.102:443
-   scp david@10.8.0.102:~/certs/domain.crt /etc/docker/certs.d/10.8.0.102\:443/ca.crt
+   sudo wget https://gist.githubusercontent.com/dayjaby/90254453e399c42eaa6f878db027e481/raw/623eea99ab7ec4db32791fc537c8a70657c0c1cf/domain.crt -O /etc/docker/certs.d/10.8.0.102\:443/ca.crt
 
 To push an image, it has to be retagged first:
 
