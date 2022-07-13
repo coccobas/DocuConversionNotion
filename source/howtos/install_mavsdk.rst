@@ -34,8 +34,10 @@ Install MAVSDK by docker/deb
 
 If modifying the proto files, make sure to generate the corresponding .h and .cpp files:
 
-.. code-block:: sh
+note: if you did not install clang-format before, please install it before you run "tools/fix_style.sh .", otherwise you will see thousands of differences related to style
 
+.. code-block:: sh
+   sudo apt install clang-format
    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DBUILD_MAVSDK_SERVER=ON -Bbuild/default -H. && tools/generate_from_protos.sh && tools/fix_style.sh .
    sudo cmake --build build/default -j8 --target install
 
