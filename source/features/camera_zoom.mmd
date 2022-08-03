@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant JS as Joystick
+    participant WJ as wejoy
+    participant BGC as BeagleGroundControl
+    participant MR as mavlink_receiver
+    participant GDC as gimbal_device_controller
+    participant EH as EH2000
+
+
+    JS ->> WJ: device 0 axis 5 > deadzone (zoom in label)
+    WJ ->> BGC: button 5 is true
+    BGC ->> MR: ZOOM_TYPE_CONTINUOUS 1
+    MR ->> GDC: forward
+    GDC ->> EH: CAN to 0xF01: 0x0F 0x12 0x01
+    JS ->> WJ: device 0 axis 5 <= deadzone
+    WJ ->> BGC: button 5 is false
+    BGC ->> MR: ZOOM_TYPE_CONTINUOUS 0
+    MR ->> GDC: forward
+    GDC ->> EH: CAN to 0xF01: 0x0F 0x12 0x03
+
+    JS ->> WJ: device 0 axis 5 < -deadzone (zoom out label)
+    WJ ->> BGC: button 6 is true
+    BGC ->> MR: ZOOM_TYPE_CONTINUOUS -1
+    MR ->> GDC: forward
+    GDC ->> EH: CAN to 0xF01: 0x0F 0x12 0x02
+    JS ->> WJ: device 0 axis 5 >= -deadzone
+    WJ ->> BGC: button 6 is false
+    BGC ->> MR: ZOOM_TYPE_CONTINUOUS 0
+    MR ->> GDC: forward
+    GDC ->> EH: CAN to 0xF01: 0x0F 0x12 0x03
