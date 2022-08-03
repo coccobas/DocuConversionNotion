@@ -18,13 +18,6 @@ Network configuration
 Test commands for the NuttX shell
 =================================
 
-Get the device information and reported feedback from the gimbal:
-
-.. code-block:: sh
-
-   listener gimbal_device_information
-   listener gimbal_device_attitude_status
-
 Do a camera trigger test:
 
 .. code-block:: sh
@@ -44,119 +37,7 @@ Do a continuous photo shooting test for 20 seconds:
 
    camera_trigger test continuous
 
-Make the camera look forward and follow yaw:
-
-.. code-block:: sh
-
-   eh2000 test follow
-
-Make the camera look down and follow yaw:
-
-.. code-block:: sh
-
-   eh2000 test lookdown
-
-Make the camera look left/right with a pitch of 45 degrees down:
-
-.. code-block:: sh
-
-   eh2000 test lookleft
-   eh2000 test lookright
-
-We provide commands to test the camera zoomed in (50mm) and zoomed out (16mm) and automatically focussed:
-
-.. code-block:: sh
-
-   eh2000 test zoomin
-   eh2000 test zoomout
-   eh2000 test focus
-
-Prepare the camera for precision landing, which includes the following commands:
-
-- zoom out (:mavlink:`MAV_CMD_SET_CAMERA_ZOOM`)
-- auto focus (:mavlink:`MAV_CMD_SET_CAMERA_FOCUS`)
-- follow yaw (:mavlink:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW`)
-- lookdown (:mavlink:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW`)
-
-.. code-block:: sh
-
-   eh2000 test precland
-
-We prepared some profiles for the camera:
-
-.. code-block:: sh
-
-   eh2000 test profile_auto
-   eh2000 test profile_shutter
-
-Be aware that these commands do certain other things: They flash the SD card and set the save path, so that images are written to the SD card.
-
-As a fallback option, ssh to the drone and run these commands:
-
-.. code-block:: sh
-
-   # Format the SD card
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=formatMedia"
-   # Switch to manual mode
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=shootMode&mode=5"
-   # Set aperture to F5.6
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=apertureMode&mode=16"
-   # Set ISO mode to AUTO
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=isoMode&mode=0"
-   # Set shutter speed to 1/2500
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=shutterSpeedMode&mode=18"
-   # Set exposure compensation to -0.3EV
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=exposureCompensationMode&mode=4"
-   # Set zoom to 0 (completely zoomed out)
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setZoomValue&value=0"
-   # Save images to SD card
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=setSavePath&path=1"
-   # Do a single capture
-   curl -G "http://192.168.42.108:80/cgi-bin/configManager.cgi?action=capture&mode=0"
-
-Video Streaming Setting
-=======================
- 
-A. Set the destination IP Address
- 
-Go to launch folder and open foxtech_eh2000.launch file
- 
-.. code-block:: sh
- 
-   cd ~/Development/BeagleComrade/launch/	
-   vim foxtech_eh2000.launch
- 
-Locate the IP Address line
- 
- .. code-block:: sh
- 	
-   /dst_addr
- 
-Move the cursor to the IP Address value (use l or arrow keys) and type
- 
-.. code-block:: sh
- 
-   ci"
-   
-Change the IP Address to designated IP Address, double check your IP address.
-
-Exit from the insert mode by pressing ESC and save the file
- 
-.. code-block:: sh
- 
-   # save changes and exit
-   :wq
-   # discard changes and exit
-   :q!
- 
-Restart the service
- 
-.. code-block:: sh
- 
-   sudo systemctl restart beagle
- 
 B. Set up QGroundControl
 
 1. Go to General Page under Application Setting.
 2. Set the video stream to UDP H264..
-3. Change the port to 8554. 
