@@ -1,0 +1,33 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  doc-build:
+
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Install Python3
+      run: action/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+      
+    - name: Install Requirements
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      
+    - name: Build docs
+      run: make clean && make html
