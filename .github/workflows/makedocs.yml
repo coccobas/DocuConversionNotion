@@ -20,7 +20,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Install Python3
-      run: action/setup-python@v4
+      uses: action/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
       
