@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         repository: BeagleSystems/BeagleComrade
-        path: /BeagleComrade
+        path: ~/BeagleComrade
         token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Install Python3
@@ -35,7 +35,7 @@ jobs:
         pip install -r requirements.txt
       
     - name: Get msg definitions for BeagleComrade
-      run: vcs import /BeagleComrade/src < /BeagleComrade/src/.rosinstall
+      run: vcs import ~/BeagleComrade/src < ~/BeagleComrade/src/.rosinstall
 
     - name: Build docs
       run: make clean && make html
