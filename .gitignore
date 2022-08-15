@@ -6,3 +6,6 @@ _build/*
 */__pycache__/*
 /node_modules
 _extensions/__pycache__/
+
+/mavros
+/ros_precland
