@@ -1,6 +1,9 @@
 How to turn any module into a docker container
 ==============================================
 
+Helpful links:
+https://vsupalov.com/cache-docker-build-dependencies-without-volume-mounting/
+https://pythonspeed.com/articles/security-updates-in-docker/
 
 Size optimization:
 
@@ -22,3 +25,9 @@ Sort installed packages by size and list their reverse dependencies (multiple ti
      ros-noetic-pcl-ros
      ros-noetic-pcl-ros
      ros-noetic-pcl-conversions
+
+Check why a healthcheck failed:
+
+.. code-block:: sh
+
+   docker inspect --format='{{json .State.Health}}' container_name
