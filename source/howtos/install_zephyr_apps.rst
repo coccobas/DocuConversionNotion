@@ -39,3 +39,12 @@ For debugging, you might want to see the debug output from the nucleo:
    screen /dev/ttyACM0 115200 8N1
 
 To quit the screen, just type ctrl+a :quit (a colon before quit).
+
+Added for STM32F303 Olimexino
+
+For upload firmware to flash without ST-LINK, first press reset button and press boot button at same time, then release
+only one red LED will left on the board, then upload the bin file to flash:
+
+.. code-block:: sh
+
+   dfu-util -a 0 -D build/zephyr/zephyr.bin -s 0x08000000
