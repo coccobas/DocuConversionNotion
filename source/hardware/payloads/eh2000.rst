@@ -2,6 +2,17 @@
 EH2000
 ######
 
+Setup
+=====
+
+First bring the device into DFU mode by holding the boot button (close to the micro usb port) and then press the reset button (on the opposite side of the board). Then proceed by flashing the Olimexino STM32F303 with the develop version of the gimbal device firmware:
+
+.. code-block:: sh
+
+   curl -k "https://10.8.0.102:443/v2/beaglesystems/gimbal_device_eh2000/blobs/$(curl -k "https://10.8.0.102:443/v2/beaglesystems/gimbal_device_eh2000/manifests/develop" | jq -r .fsLayers[0].blobSum)" | tar --strip-components 5 -Oxzf - home/user/app/build/zephyr/zephyr.bin | dfu-util -a 0 -D - -s 0x08000000
+
+
+
 Network configuration
 =====================
 
