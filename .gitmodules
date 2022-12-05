@@ -1,0 +1,6 @@
+[submodule "mavros"]
+	path = mavros
+	url = git@github.com:BeagleSystems/mavros
+[submodule "ros_precland"]
+	path = ros_precland
+	url = git@github.com:BeagleSystems/ros_precland

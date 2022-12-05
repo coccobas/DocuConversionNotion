@@ -198,9 +198,9 @@ texinfo_documents = [
 epub_exclude_files = ['search.html']
 
 if hasattr(yaml, "FullLoader"):
-    mqtt_interface_all = yaml.load(open("./BeagleComrade/config/rtk.yaml", "r"), Loader=yaml.FullLoader)
+    mqtt_interface_all = yaml.load(open("./mavros/rtk_client/config/rtk.yaml", "r"), Loader=yaml.FullLoader)
 else:
-    mqtt_interface_all = yaml.load(open("./BeagleComrade/config/rtk.yaml", "r"))
+    mqtt_interface_all = yaml.load(open("./mavros/rtk_client/config/rtk.yaml", "r"))
 mqtt_interface = mqtt_interface_all.copy()
 mqtt_interface["bridge"] = []
 mqtt_interface["messages"] = dict()
