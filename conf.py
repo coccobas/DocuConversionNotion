@@ -14,7 +14,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('./BeagleComrade/src/beaglesystems/camera_trigger/scripts'))
+sys.path.insert(0, os.path.abspath('./ros_precland/camera_trigger/scripts'))
 sys.path.insert(0, os.path.abspath('./_extensions'))
 import yaml
 import sphinx_rtd_theme
@@ -207,10 +207,10 @@ mqtt_interface["messages"] = dict()
 
 def add_message(messages, msg_package, msg_name):
     msgp = msg_package.replace(".", "/")
-    print(msgp, "./BeagleComrade/src/beaglesystems/{}/{}.msg".format(msgp, msg_name))
-    if not os.path.exists("./BeagleComrade/src/beaglesystems/{}/{}.msg".format(msgp, msg_name)):
+    print(msgp, "./mavros/{}/{}.msg".format(msgp, msg_name))
+    if not os.path.exists("./mavros/{}/{}.msg".format(msgp, msg_name)):
         return False
-    with open("./BeagleComrade/src/beaglesystems/{}/{}.msg".format(msgp, msg_name)) as fp:
+    with open("./mavros/{}/{}.msg".format(msgp, msg_name)) as fp:
         fields = []
         for i, field in enumerate(fp):
             comment = ""
