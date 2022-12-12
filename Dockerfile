@@ -16,6 +16,19 @@ RUN apt-get update \
         python3-dev \
         texlive-full \
         texlive-latex-extra \
+        libx11-xcb-dev \
+        libxcomposite-dev \
+        libxcursor-dev \
+        libxdamage-dev \
+        libxtst-dev \
+        libxss-dev \
+        libxrandr-dev \
+        libasound-dev \
+        libatk1.0-dev \
+        libatk-bridge2.0-dev \
+        libpango1.0-dev \
+        libgtk-3-dev \
+        wget \
     && pip3 install -r requirements.txt \
     && apt-get -y --quiet autoremove \
     && apt-get clean autoclean \
@@ -31,7 +44,8 @@ RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version && npm install @mermaid-js/mermaid-cli
-RUN make html && make latexpdf
+RUN make html
+RUN make latexpdf
 
 COPY ./app.py /app/app.py
 
