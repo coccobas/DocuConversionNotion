@@ -44,6 +44,8 @@ RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version && npm install @mermaid-js/mermaid-cli
+
+USER user
 RUN make html
 RUN make latexpdf
 
