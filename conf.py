@@ -18,6 +18,7 @@ sys.path.insert(0, os.path.abspath('./ros_precland/camera_trigger/scripts'))
 sys.path.insert(0, os.path.abspath('./_extensions'))
 import yaml
 import sphinx_rtd_theme
+import sphinx_bootstrap_theme
 import errno
 import sphinx.util.osutil
 sphinx.util.osutil.ENOENT = errno.ENOENT
@@ -93,22 +94,28 @@ pygments_style = None
 # a list of builtin themes.
 #
 
-html_theme = 'sphinx_rtd_theme'
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+if True:
+    html_theme = 'sphinx_rtd_theme'
+    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-#
-# html_theme_options = {}
+    # Theme options are theme-specific and customize the look and feel of a theme
+    # further.  For a list of options available for each theme, see the
+    # documentation.
+    #
+    # html_theme_options = {}
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
-html_css_files = [
-        "css/custom.css"
-]
+    # Add any paths that contain custom static files (such as style sheets) here,
+    # relative to this directory. They are copied after the builtin static files,
+    # so a file named "default.css" will overwrite the builtin "default.css".
+    html_static_path = ['_static']
+    html_css_files = []
+else:
+    html_theme = 'bootstrap'
+    html_theme_path = [sphinx_bootstrap_theme.get_html_theme_path()]
+    html_static_path = ['_static']
+    html_css_files = [
+            "css/custom.css"
+    ]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.

@@ -9,7 +9,7 @@ on:
 jobs:
   doc-build:
 
-    runs-on: [self-hosted, X64]
+    runs-on: [self-hosted, DOCHOST]
     strategy:
       matrix:
         python-version: ["3.8"]
@@ -44,4 +44,4 @@ jobs:
         pip install -r requirements.txt
       
     - name: Build docs
-      run: make clean && make html
+      run: make clean && make html && make 

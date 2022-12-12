@@ -11,7 +11,6 @@ We adhere to the recommendations described on https://www.writethedocs.org/guide
    source venv/bin/activate
    # in venv
    pip install -r requirements.txt
-   pip install git+https://github.com/dayjaby/sphinx-bootstrap-theme
 
    npm install @mermaid-js/mermaid-cli
 
