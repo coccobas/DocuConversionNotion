@@ -10,10 +10,11 @@ jobs:
   doc-build:
 
     runs-on: [self-hosted, DOCHOST]
+    timeout-minutes: 1440
     strategy:
       matrix:
-        python-version: ["3.8"]
-
+        include:
+          - platforms: linux/arm64,linux/amd64
     steps:
     - run: |
         git config --global url."git@github.com:".insteadOf "https://github.com/"
@@ -33,15 +34,33 @@ jobs:
         path: ros_precland
         token: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Install Python3
-      uses: actions/setup-python@v4
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v4
       with:
-        python-version: ${{ matrix.python-version }}
-      
-    - name: Install Requirements
+        images: 10.8.0.102:443/beaglesystems/docs
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        driver-opts: network=host
+        config-inline: |
+          [registry."10.8.0.102:443"]
+            ca=["/etc/docker/certs.d/10.8.0.102:443/ca.crt"]
+    - name: Build container
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        platforms: ${{ matrix.platforms }}
+        push: ${{ github.event_name == 'push' && (contains(github.ref, '/heads/develop') || contains(github.ref, '/tags/')) }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        build-args: |
+          CURRENT_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+
+    - name: Run docs
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-      
-    - name: Build docs
-      run: make clean && make html && make 
+        docker rm -f beagledocs || true
+        docker run --rm -it --network=host --name=beagledocs 10.8.0.102:443/beaglesystems/docs:develop
+
