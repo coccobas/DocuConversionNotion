@@ -16,6 +16,7 @@ RUN apt-get update \
         python3-dev \
         texlive-full \
         texlive-latex-extra \
+        graphviz \
         libx11-xcb-dev \
         libxcomposite-dev \
         libxcursor-dev \
@@ -34,8 +35,7 @@ RUN apt-get update \
     && apt-get clean autoclean \
     && rm -rf /var/lib/apt/lists /tmp/* /var/tmp/* /root/.cache \
     && apt-get -y --quiet autoremove
-COPY . /home/user/docs
-WORKDIR /home/user/docs
+
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
@@ -45,7 +45,12 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version && npm install @mermaid-js/mermaid-cli
 
+RUN useradd -ms /bin/bash user
+RUN chown -R user /home/user/
+RUN chgrp -R user /home/user/
 USER user
+COPY . /home/user/docs
+
 RUN make html
 RUN make latexpdf
 
