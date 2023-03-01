@@ -13,26 +13,70 @@ Upload the public key to your github settings to be able to download the reposit
 
 .. code-block:: sh
 
-   $ mkdir Development
-   $ cd Development
-   $ git clone git@github.com:BeagleSystems/BeagleComrade -b develop
+   mkdir Development
+   cd Development
+   git clone git@github.com:BeagleSystems/BeagleDroneContainers
+   sudo cp BeagleDroneContainers/docker/docker-compose /usr/local/bin/docker-compose
+   sudo cp -r BeagleDroneContainers/docker/udev/*.rules /etc/udev/rules.d/
+   sudo udevadm control --reload
+   sudo udevadm trigger
+   
 
-Create the file ~/.beaglerc with the following content.
+Create a file ~/.gitconfig with similar content as follows.
 
 .. code-block:: sh
 
-   #!/bin/bash
-   
-   # !!! Double check that these paths are correctly set !!!
-   source /opt/ros/noetic/setup.bash
-   source /home/david/Development/beaglesystems/BeagleComrade/devel/setup.bash
-   export ROS_PACKAGE_PATH=/home/david/Development/beaglesystems/PX4-Autopilot:/home/david/Development/beaglesystems/PX4-Autopilot/Tools/sitl_gazebo:$ROS_PACKAGE_PATH
-   
-   # These exports are necessary if you try to run ROS debugging tools connected via WiFi to the drone. Use the same exports on your local computer
-   #export ROS_HOSTNAME=192.168.8.100
-   #export ROS_IP=$ROS_HOSTNAME
-   #export ROS_MASTER_URI=http://$ROS_HOSTNAME:11311
-   
-   export GST_PLUGIN_PATH=/usr/local/lib/aarch64-linux-gnu/gstreamer-1.0:/usr/lib/aarch64-linux-gnu/gstreamer-1.0
-   export LD_LIBRARY_PATH=/usr/local/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH
+   [user]
+       email = dayjaby@gmail.com
+       name = David Jablonski
+   [core]
+       editor = vim
+   [http]
+       postBuffer = 524288000
+   [url "git@github.com:"]
+       insteadOf = https://github.com/
+   [pull]
+       rebase = true
 
+Install nvidia docker runtime and docker itself:
+
+.. code-block:: sh
+
+   sudo apt update
+   sudo apt install nvidia-container-runtime docker.io curl tmux openvpn
+   sudo usermod -aG docker beagle
+
+
+Create a /etc/systemd/system/socat-cubeorange.service file:
+
+.. code-block:: sh
+
+   [Unit]
+   Description=tty to udp
+   After=dev-cubeorange.device
+   
+   [Service]
+   Type=simple
+   Restart=on-failure
+   RestartSec=5s
+   ExecStart=socat file:/dev/cubeorange,nonblock,raw,echo=0 udp-sendto:127.0.0.1:5006
+   
+   [Install]
+   WantedBy=cubeorange.target
+   WantedBy=dev-cubeorange.device
+
+Copy vpn profile to the drone, activate some services and download docker registry certificate:
+
+.. code-block:: sh
+
+   scp client*.ovpn beagle@192.168.178.125:~/beaglesystems.conf
+   # On the drone:
+   sudo mv ~/beaglesystems.conf /etc/openvpn/beaglesystems.conf
+   sudo systemctl start openvpn@beaglesystems
+   sudo systemctl enable openvpn@beaglesystems
+
+   sudo systemctl start socat-cubeorange
+   sudo systemctl enable socat-cubeorange
+
+   sudo mkdir -p /etc/docker/certs.d/10.8.0.102:443
+   sudo wget https://gist.githubusercontent.com/dayjaby/0580f38d022d5990907a62a662b253d7/raw/4b4dd1bc14a2b179938e0c1cab506178e8028a66/domain.crt -O /etc/docker/certs.d/10.8.0.102\:443/ca.crt
