@@ -46,6 +46,16 @@ Install nvidia docker runtime and docker itself:
    sudo apt install nvidia-container-runtime docker.io curl tmux openvpn
    sudo usermod -aG docker beagle
 
+First download and install socat 1.7.4.4 from http://www.dest-unreach.org/socat/:
+
+.. code-block:: sh
+
+   wget http://www.dest-unreach.org/socat/download/socat-1.7.4.4.tar.gz
+   tar -xvzf
+   cd socat-1.7.4.4
+   ./configure
+   make -j4
+   sudo make install
 
 Create a /etc/systemd/system/socat-cubeorange.service file:
 
@@ -59,7 +69,7 @@ Create a /etc/systemd/system/socat-cubeorange.service file:
    Type=simple
    Restart=on-failure
    RestartSec=5s
-   ExecStart=socat file:/dev/cubeorange,nonblock,raw,echo=0 udp-sendto:127.0.0.1:5006
+   ExecStart=/usr/local/bin/socat file:/dev/cubeorange,nonblock,raw,echo=0,ignoreeof udp-sendto:127.0.0.1:5006
    
    [Install]
    WantedBy=cubeorange.target
