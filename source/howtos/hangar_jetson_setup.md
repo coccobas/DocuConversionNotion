@@ -1,68 +1,52 @@
    Documentation for Preparing the Hangar's jetson:
 
    1. Grant yourself access to your github account:   
-
-   ```
+      ```
       $ ssh-keygen -t ed25519 -C "altalmas.abdallah@gmail.com"
       $ cd ~/.ssh
       $ ll
       $ cat id_ed25519.pub 
-   ```
+      ```
    
-   2. Add the shown ssh code into your github account:
-   ```
-   github account > settings > Access, SSH and GPG keys > SSH keys, New SSH key
-   ```
+   1. Add the shown ssh code into your github account:
+      ```
+      github account > settings > Access, SSH and GPG keys > SSH keys, New SSH key
+      ```
+   
+   1. Download the openvpn (clientXX.ovpn) from google drive [profiles folder](https://drive.google.com/drive/folders/1wEnOl0tgbS9RErSNfXNNYCdGY0wY7Qsi) and update the openvpn [Excel Sheet](https://docs.google.com/spreadsheets/d/1xsuI9HG9QYv79Dmpvhj1xvi7siXjnXox/edit#gid=1639621132).
 
-   3. Clone BeagleSystems/BeagleHouse repository:
-      $ cd ~
-      $ ll
-      $ git clone --branch develop git@github.com:beaglesystems/beaglehouse.git --recursive
-
-   4. Download the openvpn (clientXX.ovpn) from google drive and update 
-      the openvpn excel sheet there.
-
-   5. Configure the openvpn ip address:
+   1. Configure the openvpn ip address:
+      ```
       $ sudo apt install openvpn
       $ cd /etc/openvpn/
       $ ls -al
       $ sudo cp ~/Downloads/clientXX.ovpn /etc/openvpn/
-      $ sudo mv client39.ovpn client.conf
+      $ sudo mv clientXX.ovpn client.conf
       $ sudo systemctl status openvpn@client.service
       $ sudo systemctl restart openvpn@client.service
       $ sudo systemctl status openvpn@client.service
       $ ifconfig tun0
       $ ping 10.8.0.1
+      ```
 
-   6. Modify some files in the repository according to the new Hangar:
-      $ cd ~/beaglehouse
-      $ ll
-      $ cd .envs/
-      $ ll
-      $ vim house.env
-         change :
-         * BEAGLE_SERVER_USERNAME=
-         * BEALGE_SERVER_PASSWORD=
-
-      $ vim vpn.env
-         change the ip address corresponding to openvpn.
-
-   7. Clone the rtk-server repository:
-      $ cd ~/beaglehouse/addendums
-      $ ll
+   1. Clone the rtk-server repository:
+      ```
+      $ cd ~
       $ git clone git@github.com:beaglesystems/rtk-server --recursive
-   
-   8. add the udev_rules:
+      ```
+      
+   1. add the udev_rules:
+      ```
       $ cd ~/beaglehouse/udev_rules
       $ sudo cp 99* /etc/udev/rules.d/
       $ ll /etc/udev/rules.d/
 
-      $ cd ~/beaglehouse/addendums/
-      $ cd rtk-server/udev
+      $ cd ~/rtk-server/udev
       $ ll
       $ sudo cp 90* /etc/udev/rules.d/
-   
-   9. Here you need to compare between each udev_rule that you
+      ```
+      
+   1. Here you need to compare between each udev_rule that you
       copied to (/etc/udev/rules.d) with each device parameters.
       And make sure the following matche:
          * {idVendor}
@@ -78,50 +62,13 @@
          After plugging the usb:
             $ dmesg
 
-   10. Activate the udev_rules:
+   1. Activate the udev_rules:
+      ```
       $ sudo udevadm control --reload
+      ```
       
-   11. Unplug and plug the usb devices again to trigger them.
-
-   12. Comment the (sensor) service for docker-compose:
-      $ cd ~/beaglehouse
-      $ vim docker-compose.yml
-
-   13. install docker-compose on Jetson from (README.md)
-      $ cd ~/beaglehouse
-      $ sudo docker --version
-      $ export DOCKER_COMPOSE_VERSION=1.27.4
-      $ sudo apt-get install libhdf5-dev
-      $ sudo apt-get install libssl-dev
-      $ sudo apt install python3
-      $ sudo apt install python3-pip
-      $ pip --version
-      $ pip3 --version
-      $ sudo pip3 install docker-compose=="${DOCKER_COMPOSE_VERSION}"
-      $ sudo python3 -m pip install --upgrade pip
-      $ sudo pip3 install docker-compose
-
-   14. run the docker-compose file (takes some time)
-      $ sudo docker-compose up -d --build
-
-   15. verify the dockers
-      $ docker ps
-
-   16. stop the dockers
-      $ sudo docker-compose down
-
+   1. Unplug and plug the usb devices again to trigger them.
       
-  117  cd .envs/
-  118  ls
-  119  nano celery.env
-  120  nano email.env
-  121  nano db.env
-  122  cd ..
-  123  sudo docker-compose up -d --build
-  124  docker ps
-  125  sudo docker ps
-  126  pip install --upgrade pip
-  127  sudo docker-compose up -d --build
-  128  sudo docker ps
-  129  sudo docker down
-  130  sudo docker-compose down
+   1. Jump to [BeagleHouse](https://github.com/BeagleSystems/BeagleHouse) and follow the README.md file and follow it in the following order:
+       1. __Install docker-compose on Jetson Series__
+       2. __Install and deploy with docker-compose__
