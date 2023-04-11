@@ -1,13 +1,18 @@
    Documentation for Preparing the Hangar's jetson:
 
    1. Grant yourself access to your github account:   
-   
+
+   ```
       $ ssh-keygen -t ed25519 -C "altalmas.abdallah@gmail.com"
       $ cd ~/.ssh
       $ ll
       $ cat id_ed25519.pub 
-
-   2. Add the shown ssh code into your github account.
+   ```
+   
+   2. Add the shown ssh code into your github account:
+   ```
+   github account > settings > Access, SSH and GPG keys > SSH keys, New SSH key
+   ```
 
    3. Clone BeagleSystems/BeagleHouse repository:
       $ cd ~
