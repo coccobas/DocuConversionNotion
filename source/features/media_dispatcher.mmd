@@ -1,0 +1,20 @@
+sequenceDiagram
+
+    Drone->>Drone: Try to load dispatcher information from config file
+    Drone->>Server: Get the latest config file from server
+    Drone->>Drone: If latest config is different with local, update local file
+    Drone->>Dispatcher: rtp video streaming over udp
+
+    Dispatcher->>Server: Get channel settings from Server every 5 mins
+    Dispatcher->>Dispatcher: Create new channel if not existed
+    BGC->>Drone: visit port 5005 to tell the drone target IP
+    Drone->>Dispatcher: Send target IP to update the forwarding (mqtt)
+    Dispatcher->>BGC: udp forwarding to BGC IP&Port
+    Dispatcher->>MediaServer: rtp to rtmp
+
+    MediaServer->>Viewer: boradcasting through webRTC
+
+    Viewer->>MediaServer: Gimbal control buttons on webpage
+    MediaServer->>Dispatcher: Customer gimbal control commands
+    Dispatcher->>Drone: Forward gimbal control commands to Right Drone (mqtt)
+    Drone->>Drone: Translate commands to mavlink messages(GIMBAL_MANAGER_SET_MANUAL_CONTROL)
