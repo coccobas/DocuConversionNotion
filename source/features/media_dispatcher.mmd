@@ -15,7 +15,9 @@ sequenceDiagram
         Drone->>Drone: update local payload stream to use streaming target
         Drone->>BGC: Direct video link to BGC
     else if broadcast is enabled
-        Drone->>Dispatcher: Send target IP to update the forwarding (mqtt)
+        Drone->>Dispatcher: Send streaming target(mqtt)
+        Dispatcher->>Drone: Send dispatcher IP address and port (mqtt)
+        Drone->>Drone: Update pipes to send to dispatcher
         Dispatcher->>Dispatcher: Update dispatcher pipe to use streaming target
         Drone->>Dispatcher: continue using the existed channel
         Dispatcher->>BGC: udp forwarding to BGC IP&Port
