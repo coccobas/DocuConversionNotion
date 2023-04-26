@@ -17,3 +17,4 @@ HowTos
    howtos/debug_usb
    howtos/setup_wifi
    howtos/postprocessing
+   howtos/free_up_space_ubuntu
