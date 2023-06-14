@@ -33,6 +33,12 @@ jobs:
         ref: develop
         path: ros_precland
         token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+      with:
+        repository: BeagleSystems/rtk_client
+        ref: develop
+        path: rtk_client
+        token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Docker meta
       id: meta
