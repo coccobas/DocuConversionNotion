@@ -15,7 +15,7 @@ First of all, the current container base image dependencies:
       "nvcr.io/nvidia/l4t-base:r35.1.0" -> "ros_noetic" [ label="if arm64" ]
       "ubuntu:20.04" -> "ros_noetic" [ label="if amd64" ]
       "ros_noetic" -> "ros_noetic_mavros"
-      "ros_noetic_mavros" -> "ros_noetic_gstreamer"
+      "ros_noetic" -> "ros_noetic_gstreamer"
       "ros_noetic_gstreamer" -> "ros_noetic_precland"
    }
 
