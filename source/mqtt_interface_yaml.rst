@@ -3,7 +3,7 @@
 MQTT interface configuration
 ============================
 
-.. include:: ../../BeagleComrade/config/rtk.yaml
+.. include:: ./rtk_client/config/rtk.yaml
    :code: yaml
 
 
