@@ -9,3 +9,5 @@ _extensions/__pycache__/
 
 /mavros
 /ros_precland
+/rtk_client
+/beagle_interfaces

@@ -3,9 +3,6 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND noninteractive
 ENV NODE_VERSION=19.2.0
 
-COPY requirements.txt /home/user/docs/requirements.txt
-WORKDIR /home/user/docs
-
 RUN apt-get update \
     && apt-get -y --quiet --no-install-recommends install \
         build-essential \
@@ -30,11 +27,14 @@ RUN apt-get update \
         libpango1.0-dev \
         libgtk-3-dev \
         wget \
-    && pip3 install -r requirements.txt \
     && apt-get -y --quiet autoremove \
     && apt-get clean autoclean \
     && rm -rf /var/lib/apt/lists /tmp/* /var/tmp/* /root/.cache \
     && apt-get -y --quiet autoremove
+
+COPY requirements.txt /home/user/docs/requirements.txt
+WORKDIR /home/user/docs
+RUN pip3 install -r requirements.txt
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 ENV NVM_DIR=/root/.nvm

@@ -23,7 +23,6 @@ import errno
 import sphinx.util.osutil
 sphinx.util.osutil.ENOENT = errno.ENOENT
 
-
 # -- Project information -----------------------------------------------------
 
 project = u'BeagleSystems Software'
@@ -109,14 +108,14 @@ if True:
     # so a file named "default.css" will overwrite the builtin "default.css".
     html_static_path = ['_static']
     html_css_files = [
-            # "css/custom.css"
+            "css/custom.css"
     ]
 else:
     html_theme = 'bootstrap'
     html_theme_path = [sphinx_bootstrap_theme.get_html_theme_path()]
     html_static_path = ['_static']
     html_css_files = [
-            # "css/custom.css"
+            "css/custom.css"
     ]
 
 # Custom sidebar templates, must be a dictionary that maps document names
@@ -216,10 +215,10 @@ mqtt_interface["messages"] = dict()
 
 def add_message(messages, msg_package, msg_name):
     msgp = msg_package.replace(".", "/")
-    print(msgp, "./mavros/{}/{}.msg".format(msgp, msg_name))
-    if not os.path.exists("./mavros/{}/{}.msg".format(msgp, msg_name)):
+    print(msgp, "./{}/{}.msg".format(msgp, msg_name))
+    if not os.path.exists("./{}/{}.msg".format(msgp, msg_name)):
         return False
-    with open("./mavros/{}/{}.msg".format(msgp, msg_name)) as fp:
+    with open("./{}/{}.msg".format(msgp, msg_name)) as fp:
         fields = []
         for i, field in enumerate(fp):
             comment = ""

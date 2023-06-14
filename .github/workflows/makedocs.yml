@@ -29,6 +29,12 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v3
       with:
+        repository: BeagleSystems/beagle_interfaces
+        ref: develop
+        path: beagle_interfaces
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+      with:
         repository: BeagleSystems/ros_precland
         ref: develop
         path: ros_precland

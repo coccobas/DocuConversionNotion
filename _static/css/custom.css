@@ -2,4 +2,5 @@
 
 .wy-nav-content {
 	max-width: none;
+    overflow: scroll;
 }
