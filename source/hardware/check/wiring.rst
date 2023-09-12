@@ -19,7 +19,7 @@ The Here 3 GPS module is connected via uavcan to the flight controller. If the m
 UART cables
 -----------
 
-Currently, the only UART cables connected to the flight controller are for gimbal control. They always use the MAVLink protocol. The Gremsy Pixy U connection runs on a 115200 baudrate and the connection to the nucleo/olimexino runs on a 230400 baudrate. The following command can be used to check the UART connectivity, specifically by testing whether there is any incoming data on the RX pin.
+Currently, the only UART cables connected to the flight controller are for gimbal control. They always use the MAVLink protocol. The Nucleo F446RE or the Olimexino STM32F3 act as "MAVLink gimbal devices" and convert the incoming MAVLink gimbal v2 messages to the respective protocols used by the actual gimbal. The Gremsy Pixy U connection runs on a 115200 baudrate and the connection to the Nucleo F446RE/Olimexino STM32F3 runs on a 230400 baudrate. The following command can be used to check the UART connectivity, specifically by testing whether there is any incoming data on the RX pin.
 
 .. code-block:: sh
 
@@ -31,6 +31,12 @@ To also test the TX pin, you can give a command to the gimbal (either nighthawk 
 
    nighthawk test lookleft
    eh2000 test lookleft
+
+All gimbal devices report the angle of the gimbal to the flight controller. This can be checked by running the following command, which might have to be run a few times to differentiate between multiple gimbals. You can distinguish them by checkng for component IDs 154 and 171.
+
+.. code-block:: sh
+
+   listener gimbal_device_attitude_status
 
 PWM cables
 ----------
