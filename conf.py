@@ -34,6 +34,8 @@ version = u''
 # The full version, including alpha/beta/rc tags
 release = u''
 
+language = "en"
+
 
 # -- General configuration ---------------------------------------------------
 
@@ -52,7 +54,7 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinx_jinja',
     'sphinxcontrib.mermaid',
-    'sphinxcontrib.napoleon',
+#    'sphinxcontrib.napoleon',
     'custom',
 ]
 
