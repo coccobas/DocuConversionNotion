@@ -214,6 +214,7 @@ else:
 mqtt_interface = mqtt_interface_all.copy()
 mqtt_interface["bridge"] = []
 mqtt_interface["messages"] = dict()
+print(mqtt_interface)
 
 def add_message(messages, msg_package, msg_name):
     msgp = msg_package.replace(".", "/")
