@@ -7,8 +7,8 @@
 MQTT interface
 ==============
 
-.. jinja:: mqtt_ctx
-   :file: templates/mqtt_interface.rst.jinja
+#.. jinja:: mqtt_ctx
+#   :file: templates/mqtt_interface.rst.jinja
 
 .. raw:: latex
 
