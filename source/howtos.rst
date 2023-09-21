@@ -18,3 +18,4 @@ HowTos
    howtos/setup_wifi
    howtos/postprocessing
    howtos/free_up_space_ubuntu
+   howtos/fix_huawei_e3372
