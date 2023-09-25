@@ -48,3 +48,11 @@ The 8 main PWM channels are accessible as /dev/pwm_output0 in the PX4 shell, and
 
    pwm test -d /dev/pwm_output0 -c 123 -p 1200
    c <enter>
+
+To calibrate ESCs, power the flight controller via USB and unpower all the ESCs first. To send the maximum PWM value on the selected channel(s) type the following command, for example for MAIN1:
+
+.. code-block:: sh
+
+   pwm test -d /dev/pwm_output0 -c 1 -p 1000 -x
+
+Now power up the ESCs and type "m" and press enter. This sends the minimum PWM value on the selected channel(s).
