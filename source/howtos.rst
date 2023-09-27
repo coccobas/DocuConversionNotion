@@ -18,4 +18,6 @@ HowTos
    howtos/setup_wifi
    howtos/postprocessing
    howtos/free_up_space_ubuntu
+   howtos/setup_self_host_apt_repository
+   howtos/packing_cmake_project
    howtos/fix_huawei_e3372
