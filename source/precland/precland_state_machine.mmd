@@ -21,37 +21,32 @@ stateDiagram-v2
              DescendAboveTarget: run_state_descend_above_target
          State FinalApproach
              FinalApproach: run_state_final_approach
-         State Search
-             Search: run_state_search
+         State DescendWhileSearch
+             DescendWhileSearch: run_state_search
          State Fallback
              Fallback: run_state_fallback
+         State YawAlignment
+             YawAlignment: run_state_yaw_alignment
          State Done
+             Done: run_state_done
 
-         start --> HorizontalApproach: if in Opportunistic/Required mode target visible
-         start --> Fallback: if in Opportunistic mode target not visible
-         start --> Search: if in Required mode target not visible
-
-         start : check_state_conditions
+         start : check_state_conditions, reset search attempts
          HorizontalApproach : check_state_conditions
          DescendAboveTarget: check_state_conditions
          FinalApproach: check_state_conditions
 
-         Search --> HorizontalApproach : if target visible and stay for 1s
-         Search --> Fallback : if search timeout
+         HorizontalApproach --> YawAlignment: if target in PLD_HACC_RAD switch_to_state_yaw_alignment
+         HorizontalApproach --> Fallback: if marker position not reached for PLD_HA_TOUT
+         HorizontalApproach --> DescendWhileSearch : if target lost
 
-         HorizontalApproach --> DescendAboveTarget: if target in PLD_HACC_RAD switch_to_state_descend_above_target
-         HorizontalApproach --> HorizontalApproach: if target not in range PLD_HACC_RAD
-         HorizontalApproach --> start : if target lost
+         YawAlignment --> DescendAboveTarget: if heading reached or PLD_YAW_TOUT passed switch_to_state_descend_above_target
 
-         DescendAboveTarget --> FinalApproach : if target stable switch_to_state_final_approach
-         DescendAboveTarget --> DescendAboveTarget
+         DescendAboveTarget --> FinalApproach : if PLD_FAPPR_ALT reached switch_to_state_final_approach
          FinalApproach --> Done : check_state_conditions
 
          Fallback --> NormalLand
 
          start --> DescendWhileSearch: in Conditional mode Search while descending in current location 
-         DescendWhileSearch --> DescendWhileSearch : if target not visible above PLD_CFB_ALT
-         DescendWhileSearch --> HorizontalApproach: if target visible and stay for 1s
-         DescendWhileSearch --> DescendAboveTarget: if target in range PLD_HACC_RAD for 0.5s(faster approach)
-         DescendWhileSearch --> Fallback : if target lost or not stable enough below PLD_CFB_ALT
+         DescendWhileSearch --> HorizontalApproach: if target visible and stay for 1s and under PLD_CFB_ALT
+         DescendWhileSearch --> Fallback: if target not visible for PLD_SRCH_TOUT or if PLD_MAX_SRCH attempts were made
      }
