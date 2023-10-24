@@ -71,7 +71,4 @@ jobs:
 
     - name: Run docs
       run: |
-        docker rm -f beagledocs || true
-        docker pull 10.8.0.102:443/beaglesystems/docs:develop
-        docker run --rm -d --network=host --name=beagledocs 10.8.0.102:443/beaglesystems/docs:develop
-
+        docker-compose up -d
