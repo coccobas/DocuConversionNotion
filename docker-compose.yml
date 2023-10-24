@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  beagledocs:
+    image: 10.8.0.102:443/beaglesystems/docs:develop
+    networks:
+      - host
+    container_name: beagledocs
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
