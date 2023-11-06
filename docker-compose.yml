@@ -3,7 +3,7 @@ version: '3.7'
 services:
   beagledocs:
     image: 10.8.0.102:443/beaglesystems/docs:develop
-    nnetwork_mode: host
+    network_mode: host
     container_name: beagledocs
     restart: always
     logging:
