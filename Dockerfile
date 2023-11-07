@@ -1,4 +1,4 @@
-FROM node:19.2.0
+FROM 10.8.0.102:443/beaglesystems/node
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -10,8 +10,8 @@ RUN apt-get update \
         python3 \
         python3-pip \
         python3-dev \
-        texlive-full \
-        texlive-latex-extra \
+        # texlive-full \
+        # texlive-latex-extra \
         graphviz \
         libx11-xcb-dev \
         libxcomposite-dev \
