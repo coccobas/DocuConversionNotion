@@ -59,6 +59,7 @@ extensions = [
 ]
 
 mermaid_cmd = "node_modules/.bin/mmdc"
+mermaid_params = ["-p", "puppeteer-config.json"]
 mermaid_output_format = "svg"
 
 # Add any paths that contain templates here, relative to this directory.

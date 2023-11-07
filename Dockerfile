@@ -13,6 +13,7 @@ RUN apt-get update \
         # texlive-full \
         # texlive-latex-extra \
         graphviz \
+        libnss3 \
         libx11-xcb-dev \
         libxcomposite-dev \
         libxcursor-dev \
@@ -33,9 +34,6 @@ RUN apt-get update \
 
 USER root
 WORKDIR /root
-RUN yarn global add puppeteer@5.5.0 && \
-    yarn global add mermaid@8.8.4 && \
-    yarn global add @mermaid-js/mermaid-cli@8.8.4
 
 RUN useradd -ms /bin/bash user
 RUN chown -R user /home/user/
@@ -43,12 +41,18 @@ RUN chgrp -R user /home/user/
 USER user
 COPY --chown=user requirements.txt /home/user/docs/requirements.txt
 WORKDIR /home/user/docs
+
+RUN pip3 install --upgrade pip
 RUN pip3 install --user -r requirements.txt
 
 COPY --chown=user . /home/user/docs
 
+RUN npm install puppeteer@21.5.0 && \
+    npm install mermaid@10.6.0 && \
+    npm install @mermaid-js/mermaid-cli@10.6.0
+
 RUN make html
-RUN make latexpdf
+# RUN make latexpdf
 
 COPY ./app.py /app/app.py
 
