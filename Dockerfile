@@ -1,4 +1,4 @@
-FROM 10.8.0.102:443/beaglesystems/node
+FROM node:19.2.0
 
 ENV DEBIAN_FRONTEND noninteractive
 
