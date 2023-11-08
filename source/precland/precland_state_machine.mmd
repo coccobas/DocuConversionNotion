@@ -11,42 +11,45 @@ stateDiagram-v2
 
      State on_active {
 
-         [*] --> start
-         State start
-             start: run_state_start
+        [*] --> start
+        State start
+            start: run_state_start
+        State HorizontalApproach
+            HorizontalApproach: run_state_horizontal_approach
+        State DescendAboveTarget
+            DescendAboveTarget: run_state_descend_above_target
+        State FinalApproach
+            FinalApproach: run_state_final_approach
+        State Search
+            Search: run_state_search
+        State Fallback
+            Fallback: run_state_fallback
+        State YawAlignment
+            YawAlignment: run_state_yaw_alignment
+        State Done
+            Done: run_state_done
 
-         State HorizontalApproach
-             HorizontalApproach: run_state_horizontal_approach
-         State DescendAboveTarget
-             DescendAboveTarget: run_state_descend_above_target
-         State FinalApproach
-             FinalApproach: run_state_final_approach
-         State DescendWhileSearch
-             DescendWhileSearch: run_state_search
-         State Fallback
-             Fallback: run_state_fallback
-         State YawAlignment
-             YawAlignment: run_state_yaw_alignment
-         State Done
-             Done: run_state_done
+        start : check_state_conditions, reset search attempts
 
-         start : check_state_conditions, reset search attempts
-         HorizontalApproach : check_state_conditions
-         DescendAboveTarget: check_state_conditions
-         FinalApproach: check_state_conditions
+        start --> Search: in Conditional mode Search while descending in current location
+        Search --> HorizontalApproach: if target visible and stay for 1s and under PLD_SRCH_ALT
+        Search --> Fallback: if target not visible for PLD_SRCH_TOUT or if PLD_MAX_SRCH attempts were made
 
-         HorizontalApproach --> YawAlignment: if target in PLD_HACC_RAD switch_to_state_yaw_alignment
-         HorizontalApproach --> Fallback: if marker position not reached for PLD_HA_TOUT
-         HorizontalApproach --> DescendWhileSearch : if target lost
+        Search: check_state_conditions
+        HorizontalApproach : check_state_conditions
+        DescendAboveTarget: check_state_conditions
+        FinalApproach: check_state_conditions
 
-         YawAlignment --> DescendAboveTarget: if heading reached or PLD_YAW_TOUT passed switch_to_state_descend_above_target
+        HorizontalApproach --> YawAlignment: if target in PLD_HACC_RAD
+        HorizontalApproach --> Fallback: if marker position not reached for PLD_HA_TOUT
+        HorizontalApproach --> Search : if target lost
 
-         DescendAboveTarget --> FinalApproach : if PLD_FAPPR_ALT reached switch_to_state_final_approach
-         FinalApproach --> Done : check_state_conditions
+        YawAlignment --> DescendAboveTarget: if heading reached or PLD_YAW_TOUT passed
 
-         Fallback --> NormalLand
+        DescendAboveTarget --> FinalApproach : if PLD_FAPPR_ALT reached
+        DescendAboveTarget --> Search: if target lost
+        FinalApproach --> Done : check_state_conditions
 
-         start --> DescendWhileSearch: in Conditional mode Search while descending in current location 
-         DescendWhileSearch --> HorizontalApproach: if target visible and stay for 1s and under PLD_CFB_ALT
-         DescendWhileSearch --> Fallback: if target not visible for PLD_SRCH_TOUT or if PLD_MAX_SRCH attempts were made
-     }
+        Fallback --> NormalLand
+
+        }
