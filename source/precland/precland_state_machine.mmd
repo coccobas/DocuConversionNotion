@@ -32,19 +32,20 @@ stateDiagram-v2
         start : check_state_conditions, reset search attempts
 
         start --> Search: in Conditional mode Search while descending in current location
-        Search --> HorizontalApproach: if target visible and stay for 1s and under PLD_SRCH_ALT
+        Search --> YawAlignment: if target visible and stay for 1s and under PLD_SRCH_ALT
         Search --> Fallback: if target not visible for PLD_SRCH_TOUT or if PLD_MAX_SRCH attempts were made
 
         Search: check_state_conditions
         HorizontalApproach : check_state_conditions
         DescendAboveTarget: check_state_conditions
         FinalApproach: check_state_conditions
+        YawAlignment: check_state_conditions
 
-        HorizontalApproach --> YawAlignment: if target in PLD_HACC_RAD
+        HorizontalApproach --> DescendAboveTarget: if target in PLD_HACC_RAD
         HorizontalApproach --> Fallback: if marker position not reached for PLD_HA_TOUT
         HorizontalApproach --> Search : if target lost
 
-        YawAlignment --> DescendAboveTarget: if heading reached or PLD_YAW_TOUT passed
+        YawAlignment --> HorizontalApproach: if heading reached or PLD_YAW_TOUT passed
 
         DescendAboveTarget --> FinalApproach : if PLD_FAPPR_ALT reached
         DescendAboveTarget --> Search: if target lost
