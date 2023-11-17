@@ -2,8 +2,8 @@ Containers
 ==========
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    containers/drone
-   containers/house
+   containers/ports
