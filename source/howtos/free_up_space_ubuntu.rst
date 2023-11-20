@@ -3,29 +3,30 @@ Free up space on Ubuntu
 
 1. Get rid of packages that are no longer needed
 
-    ..code-block: bash
+    .. code-block:: sh
 
         sudo apt-get autoremove
 
-1. Clean up APT cache (downloaded packages)
 
-    ..code-block: bash
+2. Clean up APT cache (downloaded packages)
+
+    .. code-block:: sh
 
         sudo du -sh /var/cache/apt
         sudo apt-get autoclean
         # or delete entirely
         sudo apt-get clean
 
-1. Clear systemd journal logs
+3. Clear systemd journal logs more than 3 days old
     
-    ..code-block: bash
+    .. code-block:: sh
 
         journalctl --disk-usage
         sudo journalctl --vacuum-time=3d
 
-1. Remove docker temprorary images
+4. Remove docker temprorary images
 
-    ..code-block: bash
+    .. code-block:: sh
 
         docker system prune -a
 
