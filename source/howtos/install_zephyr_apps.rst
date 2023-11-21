@@ -1,6 +1,13 @@
 Install Zephyr Apps on embedded devices like the Nucleo
 =======================================================
 
+Instead of building the apps yourself, you can also download the latest firmwares from the docker builds:
+
+.. code-block:: sh
+
+   curl -k "https://10.8.0.102:443/v2/beaglesystems/gimbal_device_nucleo_nucleo_f446re/blobs/$(curl -k "https://10.8.0.102:443/v2/beaglesystems/gimbal_device_nucleo_nucleo_f446re/manifests/develop" | jq -r .fsLayers[1].blobSum)" | tar --strip-components 5 -Oxzf - home/user/app/build/zephyr/zephyr.bin > zephyr.bin
+   st-flash --serial /dev/ttyACM0 write zephyr.bin 0x8000000
+
 Run the following installation process on an Ubuntu 20.04 computer:
 
 .. code-block:: sh
@@ -48,3 +55,4 @@ only one red LED will left on the board, then upload the bin file to flash:
 .. code-block:: sh
 
    dfu-util -a 0 -D build/zephyr/zephyr.bin -s 0x08000000
+
