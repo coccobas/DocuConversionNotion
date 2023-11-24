@@ -21,3 +21,4 @@ HowTos
    howtos/setup_self_host_apt_repository
    howtos/packing_cmake_project
    howtos/fix_huawei_e3372
+   howtos/px4_simulation
