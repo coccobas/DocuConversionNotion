@@ -10,10 +10,17 @@ Welcome to BeagleSystems Software documentation!
    :maxdepth: 3
    :caption: Contents:
 
-   source/containers
-   source/howtos
-   source/hardware
-   source/reference
-   source/precland
-   source/features
    source/guidelines
+   source/hardware
+   source/drones
+   source/hangars
+   source/drone-hangar-interfaces
+   source/servers
+   source/user-interfaces
+   source/howtos
+   source/flightplanning
+   source/postprocessing
+   source/reference
+   source/features
+   source/precland
+
