@@ -84,8 +84,6 @@ Set the PX4 parameters for precland
 
   set LTEST_CAM_MODE to Fixed
     because there is no gimbal attach with the camera in the simulation model yet, will be improved later
-  set PLD_GLOCK_EN to Lock
-    becuase gimbal is not available and no gimbal manager will reponse to the gimbal lock request, have to set it to lock manually
   set RTL_PLD_MD to Conditional precision landing (3)
     need to use conditional precision landing mode to trigger our precision landing in Return mode
 
