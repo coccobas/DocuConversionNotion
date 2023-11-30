@@ -26,7 +26,7 @@ sphinx.util.osutil.ENOENT = errno.ENOENT
 # -- Project information -----------------------------------------------------
 
 project = u'BeagleSystems Software'
-copyright = u'2021, BeagleSystems GmbH'
+copyright = u'2023, BeagleSystems GmbH'
 author = u'BeagleSystems GmbH'
 
 # The short X.Y version
@@ -56,6 +56,7 @@ extensions = [
     'sphinxcontrib.mermaid',
 #    'sphinxcontrib.napoleon',
     'custom',
+    'myst_parser',
 ]
 
 mermaid_cmd = "node_modules/.bin/mmdc"
@@ -69,7 +70,10 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown'
+}
 
 # The master toctree document.
 master_doc = 'index'
