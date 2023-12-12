@@ -13,7 +13,7 @@ Add an alias for start qgc from the build folder
 
 .. code-block:: sh
 
-   echo "alias qgc='~/Development/qgroundcontrol/build/staging/BeagleGroundControl'" > ~/.bash_aliases
+   echo "alias qgc='~/Development/BeagleGroundControl/build/staging/QGroundControl'" > ~/.bash_aliases
    source .bashrc
    qgc
 

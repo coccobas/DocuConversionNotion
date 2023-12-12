@@ -15,6 +15,7 @@ Welcome to BeagleSystems Software documentation!
    source/drones
    source/hangars
    source/drone-hangar-interfaces
+   source/groundcontrolstations
    source/servers
    source/user-interfaces
    source/howtos
