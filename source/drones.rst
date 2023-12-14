@@ -8,3 +8,4 @@ Drones
    drones/drone
    drones/ports
    drones/mavlink_ids
+   drones/smart_rtl
