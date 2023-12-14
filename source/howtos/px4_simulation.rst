@@ -64,6 +64,17 @@ Check if VPN is connected by ping 10.8.0.1, if not, connect to VPN first.
 
    docker-compose -f docker-compose.sim.yml up -d
 
+Or add alias to ~/.bash_aliases
+
+.. code-block:: sh
+
+   # simulation quick start
+   alias px4sim-pull="cd ~/Development/BeagleDroneContainers/docker && docker-compose -f docker-compose.sim.yml pull"
+   alias px4sim-up="cd ~/Development/BeagleDroneContainers/docker && docker-compose -f docker-compose.sim.yml up -d"
+   alias px4sim-restart="cd ~/Development/BeagleDroneContainers/docker && docker-compose -f docker-compose.sim.yml restart"
+   alias px4sim-down="cd ~/Development/BeagleDroneContainers/docker && docker-compose -f docker-compose.sim.yml down"
+
+Then pull / up / down / restart can be called with these short alias from command line
 
 6. Change takeoff location if needed
 ------------------------------------
