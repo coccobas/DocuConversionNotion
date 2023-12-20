@@ -6,7 +6,7 @@ Initially, it's necessary to download the certificate from the registry as it us
 .. code-block:: sh
 
    sudo mkdir -p /etc/docker/certs.d/10.8.0.102:443
-   sudo wget https://gist.githubusercontent.com/dayjaby/0580f38d022d5990907a62a662b253d7/raw/4b4dd1bc14a2b179938e0c1cab506178e8028a66/domain.crt -O /etc/docker/certs.d/10.8.0.102\:443/ca.crt
+   sudo wget https://gist.githubusercontent.com/dayjaby/0580f38d022d5990907a62a662b253d7/raw/aed9f2ca07448ca641b282edbd780db20e6849b5/domain.crt -O /etc/docker/certs.d/10.8.0.102\:443/ca.crt
 
 Or, for Malaysia/aerodyne VPN network:
 
