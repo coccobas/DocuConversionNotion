@@ -4,7 +4,7 @@ Postprocessing images
 Sentera
 -------
 
-We do the sentera postprocessing / geotag CSV creation in a jupyter notebook, running on the workshare station on the upper floor: http://10.8.1.44:8889/lab/tree/sentera.ipynb. For a new dataset only this part of the first cell needs to be modified:
+We do the sentera postprocessing / geotag CSV creation in a jupyter notebook, running on the workshare station on the upper floor: http://10.8.0.102:8889/lab/tree/sentera.ipynb. For a new dataset only this part of the first cell needs to be modified:
 
 .. code:: ipython3
 

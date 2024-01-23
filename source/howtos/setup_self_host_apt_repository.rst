@@ -33,7 +33,7 @@ For example, the folder tree should be like the following:
         └── main
             └── cpp_redis_4.3.1_amd64.deb
 
-Currently, we have it deployed on "10.8.1.44:36363/" provided by flask-file-server docker image.
+Currently, we have it deployed on "10.8.0.102:36363/" provided by flask-file-server docker image.
 
 2. Generate the list of packages
 ********************************
@@ -164,13 +164,13 @@ put the public key to share file server as well and download it to client side.
 
 .. code-block:: bash
 
-    $ wget -O - http://10.8.1.44:36363/beagle.public 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/beagle.gpg >/dev/null
+    $ wget -O - http://10.8.0.102:36363/beagle.public 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/beagle.gpg >/dev/null
 
 then add the following line to ``/etc/apt/sources.list``
 
 .. code-block:: bash
 
-    deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/beagle.gpg] http://10.8.1.44:36363/ stable main
+    deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/beagle.gpg] http://10.8.0.102:36363/ stable main
 
 To verify if the client side is ready, run 
 
@@ -182,8 +182,8 @@ if apt still complains about missing key like the following:
 
 .. code-block:: bash
 
-    W: GPG error: https://10.8.1.44:36363/ stable InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY KEY-ID
-    W: Failed to fetch https://10.8.1.44:36363/dists/stable/InRelease  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY KEY-ID
+    W: GPG error: https://10.8.0.102:36363/ stable InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY KEY-ID
+    W: Failed to fetch https://10.8.0.102:36363/dists/stable/InRelease  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY KEY-ID
 
 then you need to check the gpg key, make sure the keyring is updated and the packages must be signed with the same key.
 
@@ -202,6 +202,6 @@ The following script can help setup the apt repository on the client side.
     else
         echo beagle apt source not found
         # Add beagle apt source
-        wget -O - http://10.8.1.44:36363/beagle.public 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/beagle.gpg >/dev/null
-        echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/beagle.gpg] http://10.8.1.44:36363/ stable main" | sudo tee -a /etc/apt/sources.list
+        wget -O - http://10.8.0.102:36363/beagle.public 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/beagle.gpg >/dev/null
+        echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/beagle.gpg] http://10.8.0.102:36363/ stable main" | sudo tee -a /etc/apt/sources.list
     fi
