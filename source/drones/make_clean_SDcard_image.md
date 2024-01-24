@@ -73,7 +73,7 @@ Before you begin, make sure you have the following:
     Replace `/dev/mmcblk0` with the appropriate device name.
 1. Create an image of the SD card by running the following command:
     ```bash
-    dd if=/dev/mmcblk0 of=/path/to/destination/image.img bs=4M
+    dd if=/dev/mmcblk0 of=/path/to/destination/image.img bs=4M status=progress
     ```
     Replace `/dev/sdb` with the appropriate device name and `/path/to/destination/image.img` with the desired path and filename for the image.
 1. Wait for the `dd` command to complete. This may take some time depending on the size of the SD card.
