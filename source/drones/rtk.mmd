@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant RS as RTK_SERVER
+    participant MS as MQTT_SERVER
+    participant MB as MQTT_BRIDGE
+    participant RC as RTK_CLIENT
+    participant ROS
+    participant PX4
+    participant GPS
+    participant BGC
+
+    rect rgb(125, 255, 0)
+    alt Choose the closest RTK base station
+        RS ->> MS: house/house_id/position
+        MS ->> MB: 
+        MB ->> RC: /rtk/position
+        RC ->> RC: Choose the closest position and calculate the distance
+        RC ->> ROS: /rtk/closest
+        RC ->> ROS: /debug_value/send
+        ROS ->> BGC: mavlink message named_value_int(252) : closest RTK receiver id
+        ROS ->> BGC: mavlink message named_value_float(251) : distance to closest RTK receiver 
+    end
+    end
+
+    rect rgb(0, 125, 255)
+    alt forwarding RTK data
+        RS ->> MS: house/house_id/position
+        MS ->> MB: 
+        MB ->> RC: /rtk/rtcm
+        RC ->> ROS: /mavros/gps_rtk/send_rtcm
+        ROS ->> PX4: mavlink message GPS_RTCM_DATA(233)
+        PX4 ->> GPS: 
+        GPS ->> PX4: RTK status
+        PX4 ->> PX4: sensor_msgs/NavSatFix
+        PX4 ->> BGC: mavlink message GPS_RAW_INT(24) includes RTK float/fixed state
+    end
+    end
