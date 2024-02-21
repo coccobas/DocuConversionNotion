@@ -16,8 +16,10 @@ sequenceDiagram
         RC ->> RC: Choose the closest position and calculate the distance
         RC ->> ROS: /rtk/closest
         RC ->> ROS: /debug_value/send
-        ROS ->> BGC: mavlink message named_value_int(252) : closest RTK receiver id
-        ROS ->> BGC: mavlink message named_value_float(251) : distance to closest RTK receiver 
+        ROS ->> PX4: mavlink message named_value_int(252) : RTK_RECID
+        PX4 ->> BGC: mavlink message named_value_float(251) : RTK_RECID
+        ROS ->> PX4: mavlink message named_value_float(251) : RTK_CDIST 
+        PX4 ->> BGC: mavlink message named_value_float(251) : RTK_CDIST
     end
     end
 
