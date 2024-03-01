@@ -92,11 +92,12 @@ Change sim:home_lat, sim:home_lon, sim:home_alt in the UI, then restart the simu
 
 Set the PX4 parameters for precland
 
-
+  set PLD_GSC_BYPASS to 1
+     bypass the global position lock check
   set LTEST_CAM_MODE to Fixed
-    because there is no gimbal attach with the camera in the simulation model yet, will be improved later
+     because there is no gimbal attach with the camera in the simulation model yet, will be improved later
   set RTL_PLD_MD to Conditional precision landing (3)
-    need to use conditional precision landing mode to trigger our precision landing in Return mode
+     need to use conditional precision landing mode to trigger our precision landing in Return mode
 
 8. Setup different world mode
 -----------------------------
