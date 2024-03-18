@@ -26,16 +26,21 @@ For MAVSDK C++ applications:
    digraph mavsdkcpp_containers {
       "MAVSDK" [URL="https://github.com/BeagleSystems/mavsdk"]
       "ubuntu:18.04"
-      "ubuntu:develop"
+      "ubuntu_bionic"
+      "ubuntu:20.04"
+      "ubuntu_base"
       "mavsdkcpp_camera_manager" [URL="https://github.com/BeagleSystems/mavsdkcpp-camera-manager"]
       "mavsdkcpp_container_manager" [URL="https://github.com/BeagleSystems/mavsdkcpp-container-manager"]
       "mavsdkcpp_router" [URL="https://github.com/BeagleSystems/mavsdkcpp-router"]
-      "ubuntu:18.04" -> "ubuntu:develop" [ label="gcc-9 cmake-3.17" ]
-      "ubuntu:develop" -> "MAVSDK"
-      "MAVSDK" -> "mavsdkcpp_router_deb"
-      "MAVSDK" -> "mavsdkcpp_camera_manager"
-      "MAVSDK" -> "mavsdkcpp_container_manager"
-      "MAVSDK" -> "mavsdkcpp_router"
+      "ubuntu:18.04" -> "ubuntu_bionic" [ label="gcc-9 & cmake-3.17" ]
+      "ubuntu_bionic" -> "MAVSDK(deb)"
+      "MAVSDK(deb)" -> "mavsdkcpp_router"
+      "ubuntu_bionic" -> "mavsdkcpp_router"
+      "ubuntu_bionic" -> "mavsdkcpp_router(deb)"
+      "ubuntu_base" -> "mavsdkcpp_camera_manager"
+      "MAVSDK(deb)" -> "mavsdkcpp_camera_manager"
+      "ubuntu_base" -> "mavsdkcpp_container_manager"
+      "MAVSDK(deb)" -> "mavsdkcpp_container_manager"      
    }
 
 For MAVSDK Python applications:
