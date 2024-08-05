@@ -9,6 +9,12 @@ Building BeagleGroundControl
    docker run --rm -v ${PWD}:/project/source -v ${PWD}/build:/project/build beaglegc-linux-docker
 
 
+Update for monorepo, need to mount mavlink as volume for building:
+
+.. code-block:: sh
+
+   docker run --rm -v ${PWD}:/project/source -v ${PWD}/build:/project/build -v ${PWD}/../../protocols/mavlink:/protocols/mavlink/ beaglegc-linux-docker
+
 Add an alias for start qgc from the build folder
 
 .. code-block:: sh
