@@ -22,3 +22,4 @@ HowTos
    howtos/packing_cmake_project
    howtos/fix_huawei_e3372
    howtos/px4_simulation
+   howtos/arducam_imx477
