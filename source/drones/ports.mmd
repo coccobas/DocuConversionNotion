@@ -1,0 +1,41 @@
+graph LR
+    hangar
+    mqtt[Mqtt Server]
+    subgraph Drone
+        subgraph Hardware
+            camera[Camera]
+            cube[cubeorange]
+        end
+        subgraph Software
+            ffp[FFP Cache]
+            redis_ui[Redis UI]
+            router[MAVLink router]
+            router -- 26550 --o camera_manager
+            cube -- 5006 --o router
+            router -- 24550 --o ros_mavros
+            router -- 38550 --o container_manager
+            container_manager -- 5020 --o ros_flaskbridge
+            subgraph ros_precland
+                iplink[iplink]
+            end
+            ros_precland --o ros_core
+            ros_payload_stream --o ros_core
+            ros_flaskbridge --o ros_core
+            subgraph ros_mavros
+                mqtt_bridge
+            end
+            ros_mavros --o ros_core
+            camera_manager --o camera
+            camera_manager -- 36000 --o ffp
+        end
+    end
+    bgc[BeagleGroundControl]
+    bgc -- 34550 --o router
+    bgc -- 5005 --o iplink
+    Pilot --> bgc
+    Pilot -- 7843 --o redis_ui
+    ros_precland -- Video --> bgc
+    ros_payload_stream -- Video --> bgc
+    mqtt_bridge --o mqtt
+
+    hangar --o ffp
