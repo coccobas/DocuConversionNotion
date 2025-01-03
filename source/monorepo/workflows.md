@@ -29,4 +29,3 @@
 
     If it return "{}" then it should stopped
 
-### How
