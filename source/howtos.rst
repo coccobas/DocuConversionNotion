@@ -5,6 +5,7 @@ HowTos
    :maxdepth: 1
    :caption: Contents:
 
+   howtos/manage_repositories
    howtos/building_qgc
    howtos/containerization
    howtos/install
