@@ -5,12 +5,17 @@ Monorepo
    :maxdepth: 1
    :caption: Contents:
 
-   monorepo/overview
-   monorepo/versions
-   monorepo/px4
    monorepo/bgc
-   monorepo/workflows
-   monorepo/release_notes
-   monorepo/nucleo
-   monorepo/simulation
+   monorepo/local_build
    monorepo/logs
+   monorepo/mavlink
+   monorepo/mavsdk
+   monorepo/nucleo
+   monorepo/overview
+   monorepo/px4
+   monorepo/redis
+   monorepo/release_notes
+   monorepo/simulation
+   monorepo/upload_logs
+   monorepo/versions
+   monorepo/workflows
