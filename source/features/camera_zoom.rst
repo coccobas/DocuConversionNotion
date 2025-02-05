@@ -1,6 +1,8 @@
-Camera zoom
+Camera Zoom
 ===========
 
-Manually controlling the zoom with the joystick:
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
 
-.. mermaid:: camera_zoom.mmd
+   camera_zoom/camera_zoom

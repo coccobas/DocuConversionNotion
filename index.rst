@@ -11,6 +11,7 @@ Welcome to BeagleSystems Software documentation!
    :caption: Contents:
 
    source/guidelines
+   source/monorepo
    source/hardware
    source/drones
    source/hangars

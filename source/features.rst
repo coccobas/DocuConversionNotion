@@ -6,3 +6,6 @@ Features
    :caption: Contents:
 
    features/camera_zoom
+   features/precland
+   features/autofocus
+   features/media_dispatcher

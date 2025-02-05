@@ -1,6 +1,8 @@
 Media Dispatcher
 ================
 
-Expose video feeds to customers through a web interface provided by Ant Media:
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
 
-.. mermaid:: media_dispatcher.mmd
+   media_dispatcher/media_dispatcher
