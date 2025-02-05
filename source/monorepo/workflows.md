@@ -2,6 +2,10 @@
 
 ### worflow matrix
 
+Release workflow matrix: build all
+![Workflow Matrix](./images/workflow_matrix.png)
+
+Develop workflow matrix will only build those changed in PR or Push
 
 ### How to force cancel the running worflow
 
