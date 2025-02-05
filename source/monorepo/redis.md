@@ -47,6 +47,24 @@ redis:6379
 │           └── camera_info
 ```
 *<payload_id> should be included in root:payload:configuration
+
 **<camera_id> folder only contains static parameter related to the camera hardware, like the calibration_matrix etc.
 
 % this redis key is for pubsub
+
+### Table View
+
+| Key                                      | Reader          | Writer          | PubSub |
+|------------------------------------------|-----------------|-----------------|--------|
+| root:vehicle_name                        | all containers  | redis_ui        | No     |
+| root:payload:configuration               | payload_manager | redis_ui        | No     |
+| root:payload:<payload_id>:focus:set      | camera_handler  | redis_ui        | Yes    |
+| root:payload:<payload_id>:focus:current  | debug           | camera_handler  | No     |
+| root:payload:<payload_id>:focus:clarity  | debug           | camera_handler  | No     |
+| root:payload:<payload_id>:bitrate        | -               | stream          | Yes    |
+| root:mqtt:configuration                  | -               | redis_ui        | No     |
+| root:log_uploader:configuration          | -               | redis_ui        | No     |
+| root:log_uploader:state                  | log_uploader    |                 | Yes    |
+| root:rtk:configuration                   | rtk_client      | redis_ui        | No     |
+| root:rtk:debug_value                     | -               | rtk_client      | No     |
+| root:cameras:<camera_id>:camera_info     | cv_camera       | redis_ui        | No     |
