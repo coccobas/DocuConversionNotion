@@ -63,8 +63,8 @@ redis:6379
 | root:payload:<payload_id>:focus:clarity  | debug           | camera_handler  | No     |
 | root:payload:<payload_id>:bitrate        | -               | stream          | Yes    |
 | root:mqtt:configuration                  | -               | redis_ui        | No     |
-| root:log_uploader:configuration          | -               | redis_ui        | No     |
-| root:log_uploader:state                  | log_uploader    |                 | Yes    |
+| root:log_uploader:configuration          | log_uploader    | redis_ui        | No     |
+| root:log_uploader:state                  | debug           | log_uploader    | Yes    |
 | root:rtk:configuration                   | rtk_client      | redis_ui        | No     |
 | root:rtk:debug_value                     | -               | rtk_client      | No     |
 | root:cameras:<camera_id>:camera_info     | cv_camera       | redis_ui        | No     |
