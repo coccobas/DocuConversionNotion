@@ -24,3 +24,4 @@ HowTos
    howtos/fix_huawei_e3372
    howtos/px4_simulation
    howtos/arducam_imx477
+   howtos/debug_px4_update_firmware
