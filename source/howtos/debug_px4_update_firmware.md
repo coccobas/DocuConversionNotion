@@ -72,4 +72,21 @@ and start erase and flash afterwards.
         sudo ln -s /usr/bin/python3 /usr/bin/python
     ```
 
+5. If it reports permission error, check if current user have permission to these two groups:
+
+    * plugdev  (used for /dev/cubeorange etc.)
+    * dialout  (default group for /dev/serial/by-id/usb-hex-profiCNC* ext.)
+
+   check the user groups by 
+
+   ```
+    groups
+   ```
+
+   add the user to the group by
+
+   ```
+    sudo gpasswd --add $USER dialout
+    sudo gpasswd --add $USER plugdev
+   ```
 
