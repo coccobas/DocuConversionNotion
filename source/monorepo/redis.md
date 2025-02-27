@@ -58,6 +58,8 @@ redis:6379
 |------------------------------------------|-----------------|-----------------|--------|
 | root:vehicle_name                        | all containers  | redis_ui        | No     |
 | root:payload:configuration               | payload_manager | redis_ui        | No     |
+| root:payload:<payload_id>:record:set     | camera_handler  | camera_manager  | Yes    |
+| root:payload:<payload_id>:record:current | camera_manager  | camera_handler  | Yes    |
 | root:payload:<payload_id>:focus:set      | camera_handler  | redis_ui        | Yes    |
 | root:payload:<payload_id>:focus:current  | debug           | camera_handler  | No     |
 | root:payload:<payload_id>:focus:clarity  | debug           | camera_handler  | No     |
