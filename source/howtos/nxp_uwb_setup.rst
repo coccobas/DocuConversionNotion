@@ -12,6 +12,7 @@ To enable the UWB precland feature, configure the following PX4 parameters and p
 PX4 Parameters
 ~~~~~~~~~~~~~~
 - **UWB_PORT_CFG**: Set the serial port for UWB communication.
+- **UWB_TAG_ROT**: Set the orientation of the drone tag, relative to the FRD coordinates. 
 - **LTEST_SOURCE**: Select the data source (`ir_lock`, `uwb`, `external`).
 
   - **ir_lock**: data from uORB **irlock_report** topic
