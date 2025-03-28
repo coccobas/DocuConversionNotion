@@ -79,6 +79,8 @@ The communication between the drone and the ground station uses the Mavlink prot
 
 - **TARGET_RELATIVE**: Used for communicating the relative position of the landing target.
 - **TARGET_ABSOLUTE**: Used for communicating the absolute position of the landing target.
+- **PRECLAND_STATUS**: Used for communicating the status of the precision landing process.
+- **NAMED_VALUE_INT**: Used to send **UWB_ACT** and **IRLCK_ACT** to give information if the PX4 topics **sensor_uwb** and **irlock_report** are getting published.
 
 4.3 Precland Status Indicator in BGC
 ------------------------------------
