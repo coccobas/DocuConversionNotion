@@ -25,3 +25,5 @@ HowTos
    howtos/px4_simulation
    howtos/arducam_imx477
    howtos/debug_px4_update_firmware
+   howtos/flash_murata_type2bp
+   howtos/nxp_uwb_setup
