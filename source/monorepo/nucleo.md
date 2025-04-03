@@ -20,6 +20,9 @@ if the command st-flash is not found, you can install it through
 ```
 git clone https://github.com/stlink-org/stlink.git
 cd stlink
+# new version using C17, not working on old Ubuntu
+# let's fix the version to v1.6.0
+git checkout tags/v1.6.0
 cmake .
 make
 
