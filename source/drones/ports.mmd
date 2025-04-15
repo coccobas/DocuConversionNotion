@@ -17,6 +17,7 @@ graph LR
             container_manager -- 5020 --o ros_flaskbridge
             subgraph ros_precland
                 iplink[iplink]
+                camera_handler[camera_handler RTSP]
             end
             ros_precland --o ros_core
             ros_payload_stream --o ros_core
@@ -37,5 +38,6 @@ graph LR
     ros_precland -- Video --> bgc
     ros_payload_stream -- Video --> bgc
     mqtt_bridge --o mqtt
+    camera -- 50000-50100 --o camera_handler
 
     hangar --o ffp
