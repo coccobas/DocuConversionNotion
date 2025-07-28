@@ -56,7 +56,7 @@ get devide id
 .. code-block:: shell
 
       dk6prog listdev
-      sk6prog -d $DEVICE_ID info
+      dk6prog -d $DEVICE_ID info
 
 flash firmware
 
