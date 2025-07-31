@@ -22,7 +22,7 @@ PX4 Parameters
 
   - Ground side seems to give more reliable data and should be used.
   - If set to "Ground side (anchor)", setting the ground module heading using `LTEST_GND_HEAD` is **critical** for a working system!.
-- Set the drone module (tag) orientation with **UWB_SENS_ROT**.
+- Set the drone module (tag) orientation with **UWB_TAG_ROT**.
 
 - Set the local FRD coordinates offset from the drone center with **UWB_TAG_OFF_X**, **UWB_TAG_OFF_Y**, **UWB_TAG_OFF_Z**.
 
