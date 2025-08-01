@@ -10,6 +10,7 @@ Welcome to BeagleSystems Software documentation!
    :maxdepth: 3
    :caption: Contents:
 
+   source/installation
    source/guidelines
    source/monorepo
    source/hardware

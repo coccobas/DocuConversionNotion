@@ -1,5 +1,5 @@
-Install the BeagleSystems Software on a drone Using Docker 
-==========================================================
+v3.2.2
+======
 
 LTE check
 ---------
@@ -81,5 +81,5 @@ The allowed broadcast ports for each drone can be found in the notion page for t
 
 Supported payloads:
 
-1. Sony ILX-LR1: :ref:`_sony_ilxlr1-label <../hardware/payloads/sonyilxlr1.rst>`
+1. Sony ILX-LR1: :ref:`sony_ilxlr1-label`
 2. Nighthawk

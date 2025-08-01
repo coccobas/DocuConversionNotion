@@ -9,3 +9,4 @@ Payloads
    payloads/sentera6x
    payloads/adti61s
    payloads/adti61s_uart
+   payloads/sonyilxlr1
