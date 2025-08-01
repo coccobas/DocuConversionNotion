@@ -6,3 +6,4 @@ Guidelines
    :caption: Contents:
 
    guidelines/contribution
+   guidelines/docker
