@@ -83,30 +83,30 @@ as well to a value given to you by someone taking care of the media server (Matt
 
    {
        ... ,
-     "cam1": {
-        "type": "sony_ilxlr1",
-        "ip": "192.168.42.6",
-        "mac": "20:7B:D2:97:DE:7A",
-        "username": "R49k2a",
-        "password": "4zd5tKES",
-        "enabled": true,
-        "mavlink_comp_id": 100,
-        "stream": {
-            "flip": false,
-            "bitrate": 200000,
-            "framerate": 30,
-            "stream_height": 480,
-            "stream_width": 720,
-            "source_device": "/dev/payload",
-            "source_width": 720,
-            "source_height": 480,
-            "type": "v4l2",
-            "allow_broadcast": true,
-            "allow_record": true,
-            "record_udp_port": 40101,
-            "broadcast_address": "10.8.1.68",
-            "broadcast_port": 5811
-        }
+       "cam1": {
+           "type": "sony_ilxlr1",
+           "ip": "192.168.42.6",
+           "mac": "20:7B:D2:97:DE:7A",
+           "username": "R49k2a",
+           "password": "4zd5tKES",
+           "enabled": true,
+           "mavlink_comp_id": 100,
+           "stream": {
+               "flip": false,
+               "bitrate": 200000,
+               "framerate": 30,
+               "stream_height": 480,
+               "stream_width": 720,
+               "source_device": "/dev/payload",
+               "source_width": 720,
+               "source_height": 480,
+               "type": "v4l2",
+               "allow_broadcast": true,
+               "allow_record": true,
+               "record_udp_port": 40101,
+               "broadcast_address": "10.8.1.68",
+               "broadcast_port": 5811
+           }
    }
 
 

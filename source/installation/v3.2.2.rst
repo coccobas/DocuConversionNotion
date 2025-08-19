@@ -82,4 +82,4 @@ The allowed broadcast ports for each drone can be found in the notion page for t
 Supported payloads:
 
 1. Sony ILX-LR1: :ref:`sony_ilxlr1-label`
-2. Nighthawk
+2. Nighthawk Trip6: :ref:`nighthawk_trip6-label`

@@ -10,3 +10,4 @@ Payloads
    payloads/adti61s
    payloads/adti61s_uart
    payloads/sonyilxlr1
+   payloads/nighthawk_trip6
