@@ -27,3 +27,4 @@ HowTos
    howtos/debug_px4_update_firmware
    howtos/flash_murata_type2bp
    howtos/nxp_uwb_setup
+   howtos/link_manager
