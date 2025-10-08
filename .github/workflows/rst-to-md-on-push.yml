@@ -1,17 +1,13 @@
-name: Convert RST to Markdown & HTML
+name: Simple Usage
 
-on:
-  push:
-    paths:
-      - '*.rst'
+on: push
 
 jobs:
-  convert:
-    runs-on: ubuntu-latest
-    container:
-      image: pandoc/core:latest
-
+  convert_via_pandoc:
+    runs-on: ubuntu-22.04
     steps:
+      - uses: docker://pandoc/core:latest
+      
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -20,7 +16,7 @@ jobs:
 
       - name: Convert RST files
         run: |
-          for f in *.rst; do
+          for f in source/*.rst; do
             base="${f##*/}"
             name="${base%.rst}"
             pandoc "$f" -f rst -t markdown -o "converted/$name.md"
