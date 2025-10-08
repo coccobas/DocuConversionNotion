@@ -1,4 +1,4 @@
-- name: Convert to multiple formats
+name: Convert to multiple formats
 on: push
   run: |
     for rst_file in *.rst; do
