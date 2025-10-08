@@ -1,0 +1,8 @@
+- name: Convert to multiple formats
+on: push
+  run: |
+    for rst_file in *.rst; do
+      filename="${rst_file%.rst}"
+      pandoc "$rst_file" -f rst -t markdown -o "../converted/$filename.md"
+      pandoc "$rst_file" -f rst -t html -o "../converted/$filename.html"
+    done
