@@ -1,33 +1,35 @@
-name: Conversion on Upload
+name: Convert RST to Markdown & HTML and Commit
 
 on:
   push:
     paths:
-      - '*.rst'
+      - 'source/*.rst'
 
 jobs:
   convert_and_commit:
     runs-on: ubuntu-22.04
 
-    container:
-      image: pandoc/core:latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          persist-credentials: true   # allows push
+          persist-credentials: true
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
 
       - name: Make output folder
         run: mkdir -p converted
 
       - name: Convert RST files
         run: |
-          for f in *.rst; do
-            base="${f##*/}"
-            name="${base%.rst}"
-            pandoc "$f" -f rst -t markdown -o "converted/$name.md"
-            pandoc "$f" -f rst -t html     -o "converted/$name.html"
+          for f in source/*.rst; do
+            name="${f##*/}"
+            base="${name%.rst}"
+            pandoc "$f" -f rst -t markdown -o "converted/$base.md"
+            pandoc "$f" -f rst -t html     -o "converted/$base.html"
           done
 
       - name: Commit converted files
@@ -38,7 +40,7 @@ jobs:
           git commit -m "Add converted files" || echo "No changes to commit"
           git push
 
-      - name: Upload converted files
+      - name: Upload converted files as artifact
         uses: actions/upload-artifact@v4
         with:
           name: converted-files
