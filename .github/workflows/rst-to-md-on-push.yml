@@ -1,58 +1,34 @@
-name: Convert to multiple formats
+name: Convert RST to Markdown & HTML
 
 on:
   push:
-    branches: [ main, master ]
     paths:
-      - '*.rst'
       - 'source/*.rst'
 
 jobs:
-  convert_files:
+  convert:
     runs-on: ubuntu-latest
     container:
       image: pandoc/core:latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create output directory
+      - name: Make output folder
         run: mkdir -p converted
 
-      - name: Convert RST files to multiple formats
+      - name: Convert RST files
         run: |
-          # Convert files in root directory
-          for rst_file in *.rst; do
-            if [ -f "$rst_file" ]; then
-              filename="${rst_file%.rst}"
-              echo "Converting $rst_file..."
-              pandoc "$rst_file" -f rst -t markdown -o "converted/$filename.md"
-              pandoc "$rst_file" -f rst -t html -o "converted/$filename.html"
-            fi
+          for f in source/*.rst; do
+            base="${f##*/}"
+            name="${base%.rst}"
+            pandoc "$f" -f rst -t markdown -o "converted/$name.md"
+            pandoc "$f" -f rst -t html     -o "converted/$name.html"
           done
 
-          # Convert files in source directory if it exists
-          if [ -d "source" ]; then
-            cd source
-            for rst_file in *.rst; do
-              if [ -f "$rst_file" ]; then
-                filename="${rst_file%.rst}"
-                echo "Converting source/$rst_file..."
-                pandoc "$rst_file" -f rst -t markdown -o "../converted/$filename.md"
-                pandoc "$rst_file" -f rst -t html -o "../converted/$filename.html"
-              fi
-            done
-          fi
-
-      - name: List converted files
-        run: |
-          echo "Converted files:"
-          ls -la converted/
-
-      - name: Upload artifacts
+      - name: Upload converted files
         uses: actions/upload-artifact@v4
         with:
-          name: converted-documents
+          name: converted-files
           path: converted/
-          retention-days: 30
