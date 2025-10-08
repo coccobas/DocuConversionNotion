@@ -1,8 +1,58 @@
 name: Convert to multiple formats
-on: push
-  run: |
-    for rst_file in *.rst; do
-      filename="${rst_file%.rst}"
-      pandoc "$rst_file" -f rst -t markdown -o "../converted/$filename.md"
-      pandoc "$rst_file" -f rst -t html -o "../converted/$filename.html"
-    done
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '*.rst'
+      - 'source/*.rst'
+
+jobs:
+  convert_files:
+    runs-on: ubuntu-latest
+    container:
+      image: pandoc/core:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create output directory
+        run: mkdir -p converted
+
+      - name: Convert RST files to multiple formats
+        run: |
+          # Convert files in root directory
+          for rst_file in *.rst; do
+            if [ -f "$rst_file" ]; then
+              filename="${rst_file%.rst}"
+              echo "Converting $rst_file..."
+              pandoc "$rst_file" -f rst -t markdown -o "converted/$filename.md"
+              pandoc "$rst_file" -f rst -t html -o "converted/$filename.html"
+            fi
+          done
+
+          # Convert files in source directory if it exists
+          if [ -d "source" ]; then
+            cd source
+            for rst_file in *.rst; do
+              if [ -f "$rst_file" ]; then
+                filename="${rst_file%.rst}"
+                echo "Converting source/$rst_file..."
+                pandoc "$rst_file" -f rst -t markdown -o "../converted/$filename.md"
+                pandoc "$rst_file" -f rst -t html -o "../converted/$filename.html"
+              fi
+            done
+          fi
+
+      - name: List converted files
+        run: |
+          echo "Converted files:"
+          ls -la converted/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: converted-documents
+          path: converted/
+          retention-days: 30
