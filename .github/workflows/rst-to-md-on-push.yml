@@ -1,9 +1,12 @@
-name: Simple Usage
+name: Conversion on Upload
 
-on: push
+on:
+  push:
+    paths:
+      - '*.rst'
 
 jobs:
-  convert_via_pandoc:
+  convert_and_commit:
     runs-on: ubuntu-22.04
 
     container:
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true   # allows push
 
       - name: Make output folder
         run: mkdir -p converted
@@ -24,6 +29,14 @@ jobs:
             pandoc "$f" -f rst -t markdown -o "converted/$name.md"
             pandoc "$f" -f rst -t html     -o "converted/$name.html"
           done
+
+      - name: Commit converted files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add converted/
+          git commit -m "Add converted files" || echo "No changes to commit"
+          git push
 
       - name: Upload converted files
         uses: actions/upload-artifact@v4
