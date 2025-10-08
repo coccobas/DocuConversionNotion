@@ -3,7 +3,7 @@ name: Convert RST to Markdown & HTML
 on:
   push:
     paths:
-      - 'source/*.rst'
+      - '*.rst'
 
 jobs:
   convert:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Convert RST files
         run: |
-          for f in source/*.rst; do
+          for f in *.rst; do
             base="${f##*/}"
             name="${base%.rst}"
             pandoc "$f" -f rst -t markdown -o "converted/$name.md"
