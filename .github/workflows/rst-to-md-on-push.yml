@@ -1,9 +1,6 @@
 name: Convert RST to Markdown & HTML and Commit
 
-on:
-  push:
-    paths:
-      - 'source/*.rst'
+on: push
 
 jobs:
   convert_and_commit:
