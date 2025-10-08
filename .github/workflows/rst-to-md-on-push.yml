@@ -1,13 +1,18 @@
 name: Simple Usage
 
-on: push
+on:
+  push:
+    paths:
+      - '*.rst'
 
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-22.04
+
+    container:
+      image: pandoc/core:latest
+
     steps:
-      - uses: docker://pandoc/core:latest
-      
       - name: Checkout code
         uses: actions/checkout@v4
 
