@@ -1,9 +1,7 @@
 name: Simple Usage
 
 on:
-  push:
-    paths:
-      - '*.rst'
+  push
 
 jobs:
   convert_via_pandoc:
